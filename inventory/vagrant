@@ -1,0 +1,11 @@
+# dev (vagrant):
+# ------------------
+[app]
+dataverse.test.local
+
+#[db]
+#db.test.dev
+
+[dev:children]
+app
+#db
