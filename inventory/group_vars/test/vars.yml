@@ -1,0 +1,5 @@
+# setup vars
+environ:  "test" # dev || stage || prod || test
+
+# private vars
+login_user_passphrase: "{{ vault_login_user_passphrase }}"
