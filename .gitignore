@@ -9,3 +9,5 @@
 roles/*
 !roles/README.md
 !roles/local.*
+data/*
+!data/.keep
