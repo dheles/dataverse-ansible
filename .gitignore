@@ -5,6 +5,9 @@
 *.retry
 *.cache
 
+# python
+venv
+
 # local
 roles/*
 !roles/README.md

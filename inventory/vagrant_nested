@@ -2,6 +2,9 @@
 # dev (vagrant):
 # ------------------
 all:
+  vars:
+    cpus: 1
+    memory: 1024
   children:
     dev:
       children:
@@ -11,6 +14,10 @@ all:
               ansible_ip: '10.8.21.50'
               aliases:
                 - 'dataverse-dev'
+        db:
+          hosts:
+            dataverse-db-dev.test:
+              ansible_ip: '10.8.21.51'
     default:
       children:
         app:

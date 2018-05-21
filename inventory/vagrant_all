@@ -1,0 +1,22 @@
+---
+# dev (vagrant):
+# ------------------
+all:
+  hosts:
+    dataverse-dev.test:
+      ansible_ip: '10.8.21.50'
+      aliases:
+        - 'dataverse-dev'
+    dataverse-db-dev.test:
+      ansible_ip: '10.8.21.51'
+  vars:
+    cpus: 1
+    memory: 1024
+  children:
+    dev:
+      children:
+        app:
+        db:
+    default:
+      children:
+        app:
