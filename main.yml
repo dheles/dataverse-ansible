@@ -1,3 +1,4 @@
 ---
 - include: playbooks/preinstall.yml
 - include: playbooks/dataverse.yml
+- include: playbooks/branding.yml
