@@ -5,9 +5,18 @@
 *.retry
 *.cache
 
+# python
+venv
+
 # local
 roles/*
 !roles/README.md
 !roles/local.*
 data/*
 !data/.keep
+# BEGIN testup
+Gemfile
+Gemfile.lock
+.bundle/
+vendor/
+# END testup

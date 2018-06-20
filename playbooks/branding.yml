@@ -1,0 +1,49 @@
+---
+- name: brand our dataverse installation
+  hosts: app
+  become: true
+
+  tasks:
+  - name: test vars
+    debug:
+      msg:  "{{ dataverse }}"
+
+  - name: make sure our branding path exists
+    file:
+      dest: "{{ dataverse_branding_path }}"
+      owner: "{{ dataverse.glassfish.user }}"
+      group: "{{ dataverse.glassfish.group }}"
+      state: directory
+
+  # TODO: make this unnecessary
+  - name: make sure our logos path exists
+    file:
+      dest: "{{ dataverse_logos_path }}"
+      owner: "{{ dataverse.glassfish.user }}"
+      group: "{{ dataverse.glassfish.group }}"
+      state: directory
+
+  - name: deploy our custom header
+    block:
+    - template:
+        src: "{{ dataverse_custom_files_path }}/{{ dataverse_custom_header }}"
+        dest: "{{ dataverse_branding_path }}/{{ dataverse_custom_header }}"
+        owner: "{{ dataverse.glassfish.user }}"
+        group: "{{ dataverse.glassfish.group }}"
+        mode: 0644
+
+      # curl -X PUT -d '/var/www/dataverse/branding/custom-header.html' http://localhost:8080/api/admin/settings/:HeaderCustomizationFile
+    - uri:
+        url: "{{ dataverse.api.location }}/admin/settings/:HeaderCustomizationFile"
+        method: PUT
+        body: "{{ dataverse_branding_path }}/{{ dataverse_custom_header }}"
+    when: dataverse_custom_header is defined
+
+  - name: deploy our custom logo
+    copy:
+      src: "{{ dataverse_custom_files_path }}/{{ dataverse_custom_logo }}"
+      dest: "{{ dataverse_logos_path }}/{{ dataverse_custom_logo }}"
+      owner: "{{ dataverse.glassfish.user }}"
+      group: "{{ dataverse.glassfish.group }}"
+      mode: 0644
+    when: dataverse_custom_logo is defined
