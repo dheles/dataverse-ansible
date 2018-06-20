@@ -14,3 +14,9 @@ roles/*
 !roles/local.*
 data/*
 !data/.keep
+# BEGIN testup
+Gemfile
+Gemfile.lock
+.bundle/
+vendor/
+# END testup

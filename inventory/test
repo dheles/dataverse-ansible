@@ -3,5 +3,8 @@
 [app]
 archivetest.data.jhu.edu # aka dms-dv02.mse.jhu.edu
 
+[default:children]
+app
+
 [test:children]
 app

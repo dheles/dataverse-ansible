@@ -8,5 +8,8 @@
 - src: https://github.com/dheles/ansible-role-secure-ssh
   name: secure-ssh
 
-- src: https://github.com/dheles/dataverse-ansible-role
+- src: https://github.com/dheles/testup-ansible-role
+  name: testup
+
+- src: https://github.com/IQSS/dataverse-ansible.git
   name: dataverse
