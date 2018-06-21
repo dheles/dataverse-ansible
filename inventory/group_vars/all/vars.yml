@@ -2,8 +2,8 @@
 # that vary from dev to stage to prod, check the other subfolders
 
 # setup vars
-project:        "dataverse-ansible"
-version:        "0.2.0"
+project:        "dataverse"
+version:        "0.3.0"
 login_user:     "deploy"
 login_group:    "{{ login_user }}"
 
