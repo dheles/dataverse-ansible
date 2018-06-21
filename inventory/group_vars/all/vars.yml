@@ -59,3 +59,11 @@ rserve:
   user: "{{ vault_rserve_user }}"
   pass: "{{ vault_rserve_pass }}"
   port: 6311
+
+# db vars
+db_name:                "{{ dataverse.db }}"
+db_user:                "{{ dataverse.dbuser }}"
+db_password:            "{{ dataverse.dbpass }}"
+db_backup_file:         "dataverse_{{ environ }}_backup.sql"
+copy_backup_file:       "dataverse_dev_backup.sql"
+db_retain_backup:       true

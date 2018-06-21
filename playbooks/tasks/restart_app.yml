@@ -1,0 +1,4 @@
+- name: restart dataverse
+  service:
+    name: glassfish
+    state: restarted
