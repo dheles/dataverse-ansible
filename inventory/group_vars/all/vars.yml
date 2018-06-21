@@ -25,7 +25,7 @@ dataverse:
   dbport: 5432
   demo: false
   doi:
-    prefix: "10.7281/T12"
+    prefix: "10.7281/T1"
     protocol:
     separator: "/"
     service: EZID
