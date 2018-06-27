@@ -67,3 +67,4 @@ db_password:            "{{ dataverse.dbpass }}"
 db_backup_file:         "dataverse_{{ environ }}_backup.sql"
 copy_backup_file:       "dataverse_dev_backup.sql"
 db_retain_backup:       true
+db_fresh_backup:        false

@@ -7,16 +7,25 @@
 # then pushing it to the desired destination(s)
 - name: fetch backup file from server
   hosts: db_prod
+  gather_facts: false
 
   vars:
     backup_file: "{{ copy_backup_file }}"
 
   tasks:
-    - name: fetch backup file from server
-      fetch:
+  - name: check for existing backup file
+    stat:
+      path: "../db_backup/{{ backup_file }}"
+    delegate_to: 127.0.0.1
+    register: backup
+
+  - name: fetch backup file from server
+    block:
+    - fetch:
         src: "{{ backup_file }}"
         dest: "../db_backup/"
         flat: true
+    when: db_fresh_backup or not backup.stat.exists
 
 - name: stop app servers before restoring database
   hosts: app_not_prod
