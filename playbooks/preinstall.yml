@@ -10,11 +10,12 @@
       state: latest
     with_items: [git, bash-completion, vim]
 
-  - name: Punch firewall holes for common dataverse ports
-    firewalld:
-      state: enabled
-      port: "{{ item }}"
-      permanent: true
-      zone: public
-      immediate: true
-    with_items: [80/tcp, 443/tcp, 8080/tcp, 8181/tcp, 8983/tcp]
+  # TODO: use firewalld role, if needed
+  # - name: Punch firewall holes for common dataverse ports
+  #   firewalld:
+  #     state: enabled
+  #     port: "{{ item }}"
+  #     permanent: true
+  #     zone: public
+  #     immediate: true
+  #   with_items: [80/tcp, 443/tcp, 8080/tcp, 8181/tcp, 8983/tcp]
