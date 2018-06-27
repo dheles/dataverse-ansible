@@ -43,8 +43,8 @@ db_prod
 
 # groups:
 # ------------------
-[app_servers:children]
-#app_dev
+[app:children]
+app_dev
 #app_stage
 #app_prod
 
@@ -52,7 +52,7 @@ db_prod
 app_dev
 #app_stage
 
-[db_servers:children]
+[db:children]
 #db_dev
 #db_stage
 #db_prod
