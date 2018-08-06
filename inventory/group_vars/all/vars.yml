@@ -89,6 +89,19 @@ postgres_hba_entries:
 dvu_current_version:  "4.6"
 dvu_target_version:   "{{ dataverse.version }}"
 
+# apache vars
+apache_config_template: "templates/ssl.conf.j2"
+apache_config_file:     "/etc/httpd/conf.d/ssl.conf"
+apache_log_path:        "/var/log/httpd"
+apache_log_level:       "warn"
+
+# SSL vars
+ssl_certificate_path:           "/etc/pki/tls/certs"
+ssl_certificate_key_path:       "/etc/pki/tls/private"
+ssl_certificate_file:           "localhost.crt"
+ssl_certificate_key_file:       "localhost.key"
+ssl_certificate_chain_file:     false
+
 dvu_versions_extra:
 - version:            "4.9.1"
   metadata:

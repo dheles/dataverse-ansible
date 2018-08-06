@@ -1,0 +1,19 @@
+---
+- name: adjust webserver configs
+  hosts: app
+  become: true
+
+  handlers:
+    - name: restart apache
+      service:
+        name: httpd
+        state: restarted
+
+  tasks:
+  - name: configure apache
+    template:
+      src: "{{ apache_config_template }}"
+      dest: "{{ apache_config_file }}"
+      backup: true
+    become: true
+    notify: restart apache
