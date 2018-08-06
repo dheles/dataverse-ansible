@@ -94,31 +94,31 @@
         file: "{{ backup_file }}"
 
     # TODO: review
-    - name: remove pg_hba entry for database
-      include_role:
-        name: postgres
-        tasks_from: pg_hba_entry
-      vars:
-        type: "local"
-        database: "{{ db_name }}"
-        user: "{{ db_user }}"
-        method: "md5"
-        state: "absent"
+    # - name: remove pg_hba entry for database
+    #   include_role:
+    #     name: postgres
+    #     tasks_from: pg_hba_entry
+    #   vars:
+    #     type: "local"
+    #     database: "{{ db_name }}"
+    #     user: "{{ db_user }}"
+    #     method: "md5"
+    #     state: "absent"
 
-    - name: flush handlers so pg_hba changes take effect
-      meta: flush_handlers
-
-    - name: remove pgpass entry for database
-      include_role:
-        name: postgres
-        tasks_from: pgpass
-      vars:
-        admin_user: "{{ login_user }}"
-        admin_group: "{{ login_group }}"
-        database: "{{ db_name }}"
-        user: "{{ db_user }}"
-        password: "{{ db_password }}"
-        state: "absent"
+    # - name: flush handlers so pg_hba changes take effect
+    #   meta: flush_handlers
+    #
+    # - name: remove pgpass entry for database
+    #   include_role:
+    #     name: postgres
+    #     tasks_from: pgpass
+    #   vars:
+    #     admin_user: "{{ login_user }}"
+    #     admin_group: "{{ login_group }}"
+    #     database: "{{ db_name }}"
+    #     user: "{{ db_user }}"
+    #     password: "{{ db_password }}"
+    #     state: "absent"
 
     - name: remove the backup file from the server
       file:
