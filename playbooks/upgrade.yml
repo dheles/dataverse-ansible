@@ -1,0 +1,19 @@
+---
+- hosts: db_not_prod
+
+  tasks:
+  - name: add pgpass entry for database
+    include_role:
+      name: postgres
+      tasks_from: pgpass
+    vars:
+      admin_user: "{{ login_user }}"
+      admin_group: "{{ login_group }}"
+      database: "{{ db_name }}"
+      user: "{{ db_user }}"
+      password: "{{ db_password }}"
+      state: "present"
+
+  - name: upgrade dataverse
+    include_role:
+      name: dataverse-upgrade

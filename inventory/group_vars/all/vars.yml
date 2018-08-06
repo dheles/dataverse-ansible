@@ -84,3 +84,19 @@ postgres_hba_entries:
   user:                 "{{ db_user }}"
   address:              "samenet"
   method:               "md5"
+
+# upgrade vars
+dvu_current_version:  "4.6"
+dvu_target_version:   "{{ dataverse.version }}"
+
+dvu_versions_extra:
+- version:            "4.9.1"
+  metadata:
+  - file:     "dataContext.tsv"
+    url:      "https://raw.githubusercontent.com/jhu-sheridan-libraries/dataverse-ansible-role/master/files/dv-mdblocks"
+  - file:     "jhuSoftware.tsv"
+    url:      "https://raw.githubusercontent.com/jhu-sheridan-libraries/dataverse-ansible-role/master/files/dv-mdblocks"
+
+instance_md_blocks:
+- "dataContext"
+- "jhuSoftware"
