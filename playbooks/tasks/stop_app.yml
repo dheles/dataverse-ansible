@@ -1,0 +1,4 @@
+- name: stop dataverse
+  service:
+    name: glassfish
+    state: stopped

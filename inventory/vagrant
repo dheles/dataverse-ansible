@@ -14,3 +14,18 @@ all:
     default:
       children:
         app:
+    db:
+      children:
+        app:
+    db_prod:
+      children:
+        app:
+    app_prod:
+      children:
+        app:
+    db_not_prod:
+      children:
+        app:
+    app_not_prod:
+      children:
+        app:

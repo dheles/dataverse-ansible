@@ -1,6 +1,6 @@
 # setup vars
-environ:                "dev" # dev || stage || prod
-debugging:              true
+environ:                "stage" # dev || stage || prod
+debugging:              false
 
 # private vars
 login_user_passphrase:  "{{ vault_login_user_passphrase }}"
@@ -13,9 +13,10 @@ dataverse_custom_header:      "custom-header.html"
 dataverse_custom_logo:        "libraries.logo.small.horizontal.white.cropped.png"
 
 # apache vars
-apache_hostname:        "dataverse-dev.test:443"
-apache_fqdn:            "dataverse-dev.test"
+apache_hostname:        "archive-stage.data.jhu.edu:443"
+apache_fqdn:            "dataverse-stage.mse.jhu.edu"
 
-# TODO: move to all (?)
-postgres_version_major:     9
-postgres_version_minor:     3
+# SSL vars
+ssl_certificate_file:           "star_mse.jhu.edu.crt"
+ssl_certificate_key_file:       "star_mse.jhu.edu.key"
+ssl_certificate_chain_file:     "star_mse.jhu.edu_interim.crt"

@@ -2,8 +2,8 @@
 # that vary from dev to stage to prod, check the other subfolders
 
 # setup vars
-project:        "dataverse-ansible"
-version:        "0.2.0"
+project:        "dataverse"
+version:        "0.3.0"
 login_user:     "deploy"
 login_group:    "{{ login_user }}"
 
@@ -25,7 +25,7 @@ dataverse:
   dbport: 5432
   demo: false
   doi:
-    prefix: "10.7281/T12"
+    prefix: "10.7281/T1"
     protocol:
     separator: "/"
     service: EZID
@@ -53,9 +53,50 @@ dataverse:
     user: solr
     version: 7.3.0
   thumbnails: true
-  version: 4.9
+  version: 4.9.1
 rserve:
   host: localhost
   user: "{{ vault_rserve_user }}"
   pass: "{{ vault_rserve_pass }}"
   port: 6311
+
+# db vars
+db_name:                "{{ dataverse.db }}"
+db_user:                "{{ dataverse.dbuser }}"
+db_password:            "{{ dataverse.dbpass }}"
+db_backup_file:         "dataverse_{{ environ }}_backup.sql"
+copy_backup_file:       "dataverse_prod_backup.sql"
+db_retain_backup:       true
+db_fresh_backup:        false
+# postgres_jdbc_version:  "42.2.3"
+postgres_jdbc_driver:   "postgresql-{{ postgres_jdbc_version }}.jar"
+postgres_hba_entries:
+- type:                 "local"
+  database:             "all"
+  user:                 "postgres"
+  method:               "ident"
+- type:                 "local"
+  database:             "{{ db_name }}"
+  user:                 "{{ db_user }}"
+  method:               "md5"
+- type:                 "host"
+  database:             "{{ db_name }}"
+  user:                 "{{ db_user }}"
+  address:              "samenet"
+  method:               "md5"
+
+# upgrade vars
+dvu_current_version:  "4.6"
+dvu_target_version:   "{{ dataverse.version }}"
+
+dvu_versions_extra:
+- version:            "4.9.1"
+  metadata:
+  - file:     "dataContext.tsv"
+    url:      "https://raw.githubusercontent.com/jhu-sheridan-libraries/dataverse-ansible-role/master/files/dv-mdblocks"
+  - file:     "jhuSoftware.tsv"
+    url:      "https://raw.githubusercontent.com/jhu-sheridan-libraries/dataverse-ansible-role/master/files/dv-mdblocks"
+
+instance_md_blocks:
+- "dataContext"
+- "jhuSoftware"

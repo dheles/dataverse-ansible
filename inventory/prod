@@ -1,0 +1,19 @@
+# prod:
+# ------------------
+[app]
+archive.data.jhu.edu
+
+[default:children]
+app
+
+[prod:children]
+app
+
+[db:children]
+app
+
+# groups to emulate full environment:
+[db_prod:children]
+app
+[app_prod:children]
+app

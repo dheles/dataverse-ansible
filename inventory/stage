@@ -1,0 +1,19 @@
+# prod:
+# ------------------
+[app]
+dataverse-stage.mse.jhu # aka msel-dvstage
+
+[default:children]
+app
+
+[prod:children]
+app
+
+[db:children]
+app
+
+# groups to emulate full environment:
+[db_prod:children]
+app
+[app_prod:children]
+app

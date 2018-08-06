@@ -5,11 +5,11 @@
 # (such as IP address, cps or memory) directly beneath the hostname.
 # disregards vars elsewhere in the heirarchy
 default_ip="10.8.21.100"
-default_cpus=1
-default_memory=1024
+default_cpus=2
+default_memory=2048
 # centos
 default_vm_box="centos/7"
-default_vm_box_version="1803.01"
+default_vm_box_version="1804.02"
 # debian
 #default_vm_box="debian/stretch64"
 #default_vm_box_version="9.2.0"
