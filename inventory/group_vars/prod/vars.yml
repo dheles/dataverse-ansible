@@ -7,3 +7,11 @@ set_up_tests:                   False
 # db vars
 postgres_version_major:         9
 postgres_version_minor:         3
+
+# apache vars
+apache_hostname:        "archive.data.jhu.edu:443"
+apache_fqdn:            "dms-dv01.mse.jhu.edu"
+
+# SSL vars
+ssl_certificate_file:           "{{ vault_ssl_certificate_file }}"
+ssl_certificate_key_file:       "{{ vault_ssl_certificate_key_file }}"
