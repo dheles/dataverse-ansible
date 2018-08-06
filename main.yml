@@ -3,3 +3,4 @@
 - include: playbooks/dataverse.yml
 - include: playbooks/webserver.yml
 - include: playbooks/branding.yml
+- include: playbooks/fix_glassfish_memory.yml

@@ -1,0 +1,21 @@
+---
+- name: fix memory overcommit setting
+  hosts: app
+
+  tasks:
+  # NOTE: the previous dataverse guide recommended the following:
+  # Allow "memory overcommit":
+  # (basically, this allows to run exec() calls from inside the
+  # app, without the Unix fork() call physically hogging 2X
+  # the amount of memory glassfish is already using)
+  # echo 1 > /proc/sys/vm/overcommit_memory
+  # ...
+  # the current version does not mention this setting
+  # we are using the modern equivalent JIC
+  # https://issues.library.jhu.edu/browse/LAG-1329
+  - name: allow vm.overcommit_memory in /etc/sysctl.conf
+    sysctl:
+      name: vm.overcommit_memory
+      value: 1
+      state: present
+    become: true
