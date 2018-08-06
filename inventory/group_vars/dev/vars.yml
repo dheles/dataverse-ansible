@@ -11,3 +11,11 @@ dataverse_logos_path:         "{{ dataverse.glassfish.root }}/glassfish/domains/
 dataverse_custom_files_path:  "templates"
 dataverse_custom_header:      "custom-header.html"
 dataverse_custom_logo:        "libraries.logo.small.horizontal.white.cropped.png"
+
+# apache vars
+apache_hostname:        "dataverse-dev.test:443"
+apache_fqdn:            "dataverse-dev.test"
+
+# TODO: move to all (?)
+postgres_version_major:     9
+postgres_version_minor:     3

@@ -1,0 +1,32 @@
+---
+
+- name: stop app servers before upgrading database
+  hosts: app
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: stop application
+      include: tasks/stop_app.yml
+
+- name: upgrade database
+  hosts: db
+  become: true
+  
+  vars:
+    postgres_upgrade_ok:        true
+    postgres_upgrade_cleanup:   true
+
+  tasks:
+    - name: upgrade postgres
+      include_role:
+        name: postgres
+        tasks_from: main
+
+- name: restart app servers after upgrading database
+  hosts: app
+  become: true
+
+  tasks:
+    - name: start application
+      include: tasks/start_app.yml
