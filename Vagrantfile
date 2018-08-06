@@ -9,7 +9,7 @@ default_cpus=2
 default_memory=2048
 # centos
 default_vm_box="centos/7"
-default_vm_box_version="1803.01"
+default_vm_box_version="1804.02"
 # debian
 #default_vm_box="debian/stretch64"
 #default_vm_box_version="9.2.0"
