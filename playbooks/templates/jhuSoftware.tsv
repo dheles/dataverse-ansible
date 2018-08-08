@@ -1,0 +1,210 @@
+#metadataBlock	name	dataverseAlias	displayName												
+	software		Software Description
+#datasetField	name	title	description	watermark	fieldType	displayOrder	displayFormat	advancedSearchField	allowControlledVocabulary	allowmultiples	facetable	showabovefold	required	parent	metadatablock_id
+	swTitle	Software Title	Name of software package		text	0		TRUE	FALSE	FALSE	FALSE	TRUE	FALSE		software
+	swLicense	License	The license under which this software package is distributed. Does not apply to dependencies if they already have their own license.		text	1		TRUE	TRUE	FALSE	TRUE	TRUE	FALSE		software
+	swDescription	Description	A short synopsis of the software package. Include things like purpose, intended audience, and its current state of maturity.		textbox	2		TRUE	FALSE	FALSE	FALSE	TRUE	FALSE		software
+	swArtifactType	Artifact Type	The type of software artifact being described. 'Source code' includes scripts and any non-compiled software		text	3		TRUE	TRUE	TRUE	TRUE	TRUE	FALSE		software
+	swVersion	Software Version	Software package version being described		text	4		TRUE	FALSE	FALSE	FALSE	TRUE	FALSE		software
+	swDatePublished	Date Published	Date software was published. May or may not be the same as the date this Dataverse dataset was created	YYYY or YYYY-MM or YYYY-MM-DD	date	5		TRUE	FALSE	FALSE	FALSE	TRUE	FALSE		software
+	swCodeRepositoryLink	Code Repository Link	Link to software in code repository (e.g. Github). Can link to a specific commit or Github release for increased specificity	URL	url	6	<a href="#VALUE">#VALUE</a>	TRUE	FALSE	FALSE	TRUE	TRUE	FALSE		software
+	swLanguage	Programming Language	The programming language(s) corresponding to the artifact.		text	7		TRUE	TRUE	TRUE	TRUE	TRUE	FALSE		software
+	swFunction	Function	A general description of the functionality of the artifact. Select all that apply		text	8		TRUE	TRUE	TRUE	TRUE	TRUE	FALSE		software
+	swInteractionMethod	Interaction Method	A description of how users interact with the artifact.		text	9		FALSE	TRUE	TRUE	TRUE	TRUE	FALSE		software
+	swContributor	Software Contributors	Who contributed to the development of this software package		none	10		FALSE	FALSE	TRUE	FALSE	TRUE	FALSE		software
+	swContributorName	Software Contributor Name	Name of a particular contributor that contributed to this software package	FamilyName, GivenName	text	11		TRUE	FALSE	FALSE	TRUE	TRUE	FALSE	swContributor	software
+	swContributorRole	Software Contributor Role	What was the primary role of this contributor?		text	12		FALSE	TRUE	FALSE	TRUE	TRUE	FALSE	swContributor	software
+	swContributorId	Contributor Identifier	E.g., ResearcherID, ORCiD etc.		text	13		FALSE	FALSE	FALSE	FALSE	TRUE	FALSE	swContributor	software
+	swContributorNote	Contributor note	Addidtional information on this contributor		text	14		FALSE	FALSE	FALSE	FALSE	TRUE	FALSE	swContributor	software
+	swDependency	Dependencies	Describe any dependencies required (e.g., operating system, frameworks, libraries, etc.) along with their version numbers if available		none	15		FALSE	FALSE	TRUE	FALSE	TRUE	FALSE		software
+	swDependencyType	Dependency Type	The general type of dependency associated with this software package		text	16		FALSE	TRUE	FALSE	TRUE	TRUE	FALSE	swDependency	software
+	swDependencyDescription	Dependency Description	Describe the dependency. Include version numbers and any other relevant information.		textbox	17		FALSE	FALSE	FALSE	FALSE	TRUE	FALSE	swDependency	software
+	swDependencyLink	Dependency Location	Link to where the dependency or additional information on it can be found.	URL	url	18	<a href="#VALUE">#VALUE</a>	FALSE	FALSE	FALSE	FALSE	TRUE	FALSE	swDependency	software
+	swInputOutput	Input/Output	Inputs / Outputs associated with this package		none	19		FALSE	FALSE	TRUE	FALSE	TRUE	FALSE		software
+	swInputOutputType	Input or Output type	The type of input or output associated with this package		text	20		FALSE	TRUE	FALSE	TRUE	TRUE	FALSE	swInputOutput	software
+	swInputOutputDescription	Description	Describe the input or output including any relevant information (size, type, usage, how it arises, caveats, etc.)		textbox	21		FALSE	FALSE	FALSE	FALSE	TRUE	FALSE	swInputOutput	software
+	swInputOutputLink	Input/Output Location	Link to the input/output or where additional information on it can be found.	URL	url	22	<a href="#VALUE">#VALUE</a>	FALSE	FALSE	FALSE	FALSE	TRUE	FALSE	swInputOutput	software
+	swOtherRelatedSoftware	Other related software	Describe related software e.g., similar software, software that depends on this software, other versions of this software (don't use for dependencies)).		none	23		FALSE	FALSE	TRUE	FALSE	TRUE	FALSE		software
+	swOtherRelatedSoftwareType	Other related software type	The type of the related software		textbox	24		FALSE	TRUE	FALSE	TRUE	TRUE	FALSE	swOtherRelatedSoftware	software
+	swOtherRelatedSoftwareDescription	Other Related software Description	Additional information that desrcibes the related software		textbox	25		FALSE	FALSE	FALSE	FALSE	TRUE	FALSE	swOtherRelatedSoftware	software
+	swOtherRelatedSoftwareLink	Other Related software Location	Link to the related software	URL	url	26	<a href="#VALUE">#VALUE</a>	FALSE	FALSE	FALSE	FALSE	TRUE	FALSE	swOtherRelatedSoftware	software
+	swOtherRelatedResource	Other related resources	Describe related resources such as website, or associated papers, or other software that haven't already been described (don't use for link to code repository, dependencies, or input/output files).		none	27		FALSE	FALSE	TRUE	FALSE	TRUE	FALSE		software
+	swOtherRelatedResourceType	Other related resource type	The type of the related resource		textbox	28		FALSE	TRUE	FALSE	TRUE	TRUE	FALSE	swOtherRelatedResource	software
+	swOtherRelatedResourceDescription	Other Related resource Description	What is the relevance of the related resource to the software being described?		textbox	29		FALSE	FALSE	FALSE	FALSE	TRUE	FALSE	swOtherRelatedResource	software
+	swOtherRelatedResourceLink	Other Related resource Location	Link to the related resource	URL	url	30	<a href="#VALUE">#VALUE</a>	FALSE	FALSE	FALSE	FALSE	TRUE	FALSE	swOtherRelatedResource	software
+	swIdentifier	Software Identifier	An additional persistent identifier for this software package (if one has been created elsewhere)		text	31		TRUE	FALSE	TRUE	FALSE	TRUE	FALSE		software
+#controlledVocabulary	DatasetField	Value	identifier	displayOrder
+	swContributorRole	Other		0
+	swContributorRole	Principal Investigator		1
+	swContributorRole	Investigator		2
+	swContributorRole	Architect		3
+	swContributorRole	Developer		4
+	swContributorRole	Lead Developer		5
+	swContributorRole	Documenter		6
+	swContributorRole	Tester		7
+	swContributorRole	Project Manager		8
+	swContributorRole	Publisher		9
+	swContributorRole	Sponsor		10
+	swInteractionMethod	Other		0
+	swInteractionMethod	Command Line Interface		1
+	swInteractionMethod	Graphical		2
+	swInteractionMethod	Programmatic	Library, API calls	3
+	swDependencyType	Other		0
+	swDependencyType	Unknown		1
+	swDependencyType	Emulation / Virtualization / Containerization Environment	Virtuabox, Docker etc. (if the software is distributed using such technology)	2
+	swDependencyType	Hardware	Specialized hardware	3
+	swDependencyType	Library / Module	Embedded in the software	4
+	swDependencyType	Operating System	Supported OS's	5
+	swDependencyType	Software Package or Platform	Called via system call (e.g., utilities)	6
+	swDependencyType	Web Service	Amazon, mapping APIs, etc.	7
+	swInputOutputType	Input - Data File		0
+	swInputOutputType	Input - Data Stream		1
+	swInputOutputType	Input - Parameter		2
+	swInputOutputType	Input - User Interaction		3
+	swInputOutputType	Input - Other		4
+	swInputOutputType	Output - Data File		5
+	swInputOutputType	Output - Data Stream		6
+	swInputOutputType	Output - Display		7
+	swInputOutputType	Output - Command / Action		8
+	swInputOutputType	Output - Other		9
+	swFunction	Other		0
+	swFunction	Analysis tool / framework		1
+	swFunction	Data collection / organization		2
+	swFunction	Data transformation		3
+	swFunction	Database query / management		4
+	swFunction	Decision Support		5
+	swFunction	Hardware interface / control		6
+	swFunction	Simulation / modeling		7
+	swFunction	Visualization		8
+	swFunction	Web service		9
+	swFunction	Workflow automation		10
+	swArtifactType	Other		0
+	swArtifactType	Source Code		1
+	swArtifactType	Compiled Executable		2
+	swArtifactType	Source Code & Compiled Executable		3
+	swOtherRelatedSoftwareType	Other		0
+	swOtherRelatedSoftwareType	Interoperable Software		1
+	swOtherRelatedSoftwareType	Is Used By		2
+	swOtherRelatedSoftwareType	Similar Software		3
+	swOtherRelatedSoftwareType	Software Version (Superseded By)	links to the subsequent version of this software artifact	4
+	swOtherRelatedSoftwareType	Software Version (Supersedes)	links to the prior version of this software artifact	5
+	swOtherRelatedResourceType	Other		0
+	swOtherRelatedResourceType	Alternate Download Location		1
+	swOtherRelatedResourceType	Community Wiki / Forum		2
+	swOtherRelatedResourceType	Database / Data Catalog		3
+	swOtherRelatedResourceType	Developer Documentation		4
+	swOtherRelatedResourceType	Main Website		5
+	swOtherRelatedResourceType	Publication		6
+	swOtherRelatedResourceType	Social Media		7
+	swOtherRelatedResourceType	Support Website		8
+	swOtherRelatedResourceType	Test / Benchmark Data		9
+	swOtherRelatedResourceType	User Documentation		10
+	swLanguage	Other		0
+	swLanguage	Not Applicable		1
+	swLanguage	Assembly		2
+	swLanguage	C / C++		3
+	swLanguage	C#		4
+	swLanguage	Fortran		5
+	swLanguage	HTML		6
+	swLanguage	Java		7
+	swLanguage	Javascript		8
+	swLanguage	Labview		9
+	swLanguage	Maple		10
+	swLanguage	Mathematica		11
+	swLanguage	MATLAB		12
+	swLanguage	Perl		13
+	swLanguage	PHP		14
+	swLanguage	Python		15
+	swLanguage	R		16
+	swLanguage	Ruby		17
+	swLanguage	Shell script		18
+	swLanguage	SPSS Syntax		19
+	swLanguage	SQL		20
+	swLanguage	Stata do-file		21
+	swLanguage	Visual Basic		22
+	swLanguage	Visual Basic .Net		23
+	swLicense	Other (see Description or LICENSE file)		0
+	swLicense	Not Specified		1
+	swLicense	Apache License 2.0 (Apache-2.0)	https://opensource.org/licenses/Apache-2.0	2
+	swLicense	GNU Affero General Public License v3 (AGPL-3.0)	https://opensource.org/licenses/AGPL-3.0	3
+	swLicense	GNU General Public License version 3.0 (GPL-3.0)	https://opensource.org/licenses/GPL-3.0	4
+	swLicense	GNU Library or "Lesser" General Public License version 3.0 (LGPL-3.0)	https://opensource.org/licenses/LGPL-3.0	5
+	swLicense	MIT license (MIT)	https://opensource.org/licenses/MIT	6
+	swLicense	Mozilla Public License 2.0 (MPL-2.0)	https://opensource.org/licenses/MPL-2.0	7
+	swLicense	The Unlicense	http://choosealicense.com/appendix/	8
+	swLicense	Academic Free License 3.0 (AFL-3.0)	https://opensource.org/licenses/AFL-3.0	9
+	swLicense	Adaptive Public License (APL-1.0)	https://opensource.org/licenses/APL-1.0	10
+	swLicense	Apple Public Source License (APSL-2.0)	https://opensource.org/licenses/APSL-2.0	11
+	swLicense	Artistic license 2.0 (Artistic-2.0)	https://opensource.org/licenses/Artistic-2.0	12
+	swLicense	Attribution Assurance Licenses (AAL)	https://opensource.org/licenses/AAL	13
+	swLicense	Boost Software License (BSL-1.0)	https://opensource.org/licenses/BSL-1.0	14
+	swLicense	BSD 2-Clause "Simplified" or "FreeBSD" License (BSD-2-Clause)	https://opensource.org/licenses/BSD-2-Clause	15
+	swLicense	BSD 3-Clause "New" or "Revised" License (BSD-3-Clause)	https://opensource.org/licenses/BSD-3-Clause	16
+	swLicense	BSD 3-clause Clear License	http://choosealicense.com/appendix/	17
+	swLicense	CeCILL License 2.1 (CECILL-2.1)	https://opensource.org/licenses/CECILL-2.1	18
+	swLicense	CNRI Python license (CNRI-Python) (CNRI portion of Python License)	https://opensource.org/licenses/CNRI-Python	19
+	swLicense	Common Development and Distribution License 1.0 (CDDL-1.0)	https://opensource.org/licenses/CDDL-1.0	20
+	swLicense	Common Public Attribution License 1.0 (CPAL-1.0)	https://opensource.org/licenses/CPAL-1.0	21
+	swLicense	Computer Associates Trusted Open Source License 1.1 (CATOSL-1.1)	https://opensource.org/licenses/CATOSL-1.1	22
+	swLicense	Creative Commons Attribution 4.0	http://choosealicense.com/appendix/	23
+	swLicense	Creative Commons Attribution Share Alike 4.0	http://choosealicense.com/appendix/	24
+	swLicense	Creative Commons Zero v1.0 Universal	http://choosealicense.com/appendix/	25
+	swLicense	CUA Office Public License Version 1.0 (CUA-OPL-1.0)	https://opensource.org/licenses/CUA-OPL-1.0	26
+	swLicense	Do What The F*ck You Want To Public License	http://choosealicense.com/appendix/	27
+	swLicense	Eclipse Public License 1.0 (EPL-1.0)	https://opensource.org/licenses/EPL-1.0	28
+	swLicense	eCos License version 2.0	https://opensource.org/licenses/eCos-2.0	29
+	swLicense	Educational Community License, Version 2.0 (ECL-2.0)	https://opensource.org/licenses/ECL-2.0	30
+	swLicense	Eiffel Forum License V2.0 (EFL-2.0)	https://opensource.org/licenses/EFL-2.0	31
+	swLicense	Entessa Public License (Entessa)	https://opensource.org/licenses/Entessa	32
+	swLicense	EU DataGrid Software License (EUDatagrid)	https://opensource.org/licenses/EUDatagrid	33
+	swLicense	European Union Public License 1.1	http://choosealicense.com/appendix/	34
+	swLicense	Fair License (Fair)	https://opensource.org/licenses/Fair	35
+	swLicense	Frameworx License (Frameworx-1.0)	https://opensource.org/licenses/Frameworx-1.0	36
+	swLicense	Free Public License 1.0.0	https://opensource.org/licenses/FPL-1.0.0	37
+	swLicense	GNU General Public License version 2.0 (GPL-2.0)	https://opensource.org/licenses/GPL-2.0	38
+	swLicense	GNU Library or "Lesser" General Public License version 2.1 (LGPL-2.1)	https://opensource.org/licenses/LGPL-2.1	39
+	swLicense	Historical Permission Notice and Disclaimer (HPND)	https://opensource.org/licenses/HPND	40
+	swLicense	IBM Public License 1.0 (IPL-1.0)	https://opensource.org/licenses/IPL-1.0	41
+	swLicense	IPA Font License (IPA)	https://opensource.org/licenses/IPA	42
+	swLicense	ISC License (ISC)	https://opensource.org/licenses/ISC	43
+	swLicense	LaTeX Project Public License 1.3c (LPPL-1.3c)	https://opensource.org/licenses/LPPL-1.3c	44
+	swLicense	Licence Libre du Québec – Permissive (LiLiQ-P) version 1.1	https://opensource.org/licenses/LiLiQ-P-1.1	45
+	swLicense	Licence Libre du Québec – Réciprocité (LiLiQ-R) version 1.1	https://opensource.org/licenses/LiLiQ-R-1.1	46
+	swLicense	Licence Libre du Québec – Réciprocité forte (LiLiQ-R+) version 1.1	https://opensource.org/licenses/LiLiQ-Rplus-1.1	47
+	swLicense	Lucent Public License Version 1.02 (LPL-1.02)	https://opensource.org/licenses/LPL-1.02	48
+	swLicense	Microsoft Public License (MS-PL)	https://opensource.org/licenses/MS-PL	49
+	swLicense	Microsoft Reciprocal License (MS-RL)	https://opensource.org/licenses/MS-RL	50
+	swLicense	MirOS Licence (MirOS)	https://opensource.org/licenses/MirOS	51
+	swLicense	Motosoto License (Motosoto)	https://opensource.org/licenses/Motosoto	52
+	swLicense	Multics License (Multics)	https://opensource.org/licenses/Multics	53
+	swLicense	NASA Open Source Agreement 1.3 (NASA-1.3)	https://opensource.org/licenses/NASA-1.3	54
+	swLicense	Naumen Public License (Naumen)	https://opensource.org/licenses/Naumen	55
+	swLicense	Nethack General Public License (NGPL)	https://opensource.org/licenses/NGPL	56
+	swLicense	Nokia Open Source License (Nokia)	https://opensource.org/licenses/Nokia	57
+	swLicense	Non-Profit Open Software License 3.0 (NPOSL-3.0)	https://opensource.org/licenses/NPOSL-3.0	58
+	swLicense	NTP License (NTP)	https://opensource.org/licenses/NTP	59
+	swLicense	OCLC Research Public License 2.0 (OCLC-2.0)	https://opensource.org/licenses/OCLC-2.0	60
+	swLicense	Open Group Test Suite License (OGTSL)	https://opensource.org/licenses/OGTSL	61
+	swLicense	Open Software License 3.0 (OSL-3.0)	https://opensource.org/licenses/OSL-3.0	62
+	swLicense	OSET Public License version 2.1	https://opensource.org/licenses/OPL-2.1	63
+	swLicense	PHP License 3.0 (PHP-3.0)	https://opensource.org/licenses/PHP-3.0	64
+	swLicense	Python License (Python-2.0) (overall Python license)	https://opensource.org/licenses/Python-2.0	65
+	swLicense	Q Public License (QPL-1.0)	https://opensource.org/licenses/QPL-1.0	66
+	swLicense	RealNetworks Public Source License V1.0 (RPSL-1.0)	https://opensource.org/licenses/RPSL-1.0	67
+	swLicense	Reciprocal Public License 1.5 (RPL-1.5)	https://opensource.org/licenses/RPL-1.5	68
+	swLicense	Ricoh Source Code Public License (RSCPL)	https://opensource.org/licenses/RSCPL	69
+	swLicense	SIL Open Font License 1.1 (OFL-1.1)	https://opensource.org/licenses/OFL-1.1	70
+	swLicense	Simple Public License 2.0 (SimPL-2.0)	https://opensource.org/licenses/SimPL-2.0	71
+	swLicense	Sleepycat License (Sleepycat)	https://opensource.org/licenses/Sleepycat	72
+	swLicense	Sun Public License 1.0 (SPL-1.0)	https://opensource.org/licenses/SPL-1.0	73
+	swLicense	Sybase Open Watcom Public License 1.0 (Watcom-1.0)	https://opensource.org/licenses/Watcom-1.0	74
+	swLicense	The PostgreSQL License (PostgreSQL)	https://opensource.org/licenses/PostgreSQL	75
+	swLicense	Universal Permissive License (UPL)	https://opensource.org/licenses/UPL	76
+	swLicense	University of Illinois/NCSA Open Source License (NCSA)	https://opensource.org/licenses/NCSA	77
+	swLicense	Vovida Software License v. 1.0 (VSL-1.0)	https://opensource.org/licenses/VSL-1.0	78
+	swLicense	W3C License (W3C)	https://opensource.org/licenses/W3C	79
+	swLicense	wxWindows Library License (WXwindows)	https://opensource.org/licenses/WXwindows	80
+	swLicense	X.Net License (Xnet)	https://opensource.org/licenses/Xnet	81
+	swLicense	Zero Clause BSD License (0BSD): see Free Public License 1.0.0	https://opensource.org/licenses/FPL-1.0.0	82
+	swLicense	zlib/libpng license (Zlib)	https://opensource.org/licenses/Zlib	83
+	swLicense	Zope Public License 2.0 (ZPL-2.0)	https://opensource.org/licenses/ZPL-2.0	84
