@@ -4,10 +4,6 @@
   become: true
 
   tasks:
-  - name: test vars
-    debug:
-      msg:  "{{ dataverse }}"
-
   - name: make sure our branding path exists
     file:
       dest: "{{ dataverse_branding_path }}"
