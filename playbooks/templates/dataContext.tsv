@@ -1,0 +1,5 @@
+#metadataBlock	name	dataverseAlias	displayName												
+	dataContext		Data Collection and Methodology
+#datasetField	name	title	description	watermark	 fieldType	displayOrder	displayFormat	advancedSearchField	allowControlledVocabulary	allowmultiples	facetable	showabovefold	required	parent	metadatablock_id
+	howToCite	How to Cite	How to Cite this Data		text	0		FALSE	FALSE	TRUE	FALSE	TRUE	FALSE		dataContext
+	whenCollected	When Collected	The date or date range during the data was collected.	YYYY or YYYY-MM or YYYY-MM-DD	text	1		FALSE	FALSE	TRUE	FALSE	FALSE	FALSE		dataContext

@@ -85,10 +85,6 @@ postgres_hba_entries:
   address:              "samenet"
   method:               "md5"
 
-# upgrade vars
-dvu_current_version:  "4.6"
-dvu_target_version:   "{{ dataverse.version }}"
-
 # apache vars
 apache_config_template: "templates/ssl.conf.j2"
 apache_config_file:     "/etc/httpd/conf.d/ssl.conf"
@@ -102,14 +98,29 @@ ssl_certificate_file:           "localhost.crt"
 ssl_certificate_key_file:       "localhost.key"
 ssl_certificate_chain_file:     false
 
-dvu_versions_extra:
-- version:            "4.9.1"
-  metadata:
-  - file:     "dataContext.tsv"
-    url:      "https://raw.githubusercontent.com/jhu-sheridan-libraries/dataverse-ansible-role/master/files/dv-mdblocks"
-  - file:     "jhuSoftware.tsv"
-    url:      "https://raw.githubusercontent.com/jhu-sheridan-libraries/dataverse-ansible-role/master/files/dv-mdblocks"
-
-instance_md_blocks:
-- "dataContext"
-- "jhuSoftware"
+# upgrade vars
+dvu_current_version:  "4.6"
+dvu_target_version:   "{{ dataverse.version }}"
+dvu_extra_metadata_dir: "templates"
+dvu_extra_metadata:
+- file:     "dataContext.tsv"
+  local:    true
+  index:    true
+- file:     "jhuSoftware.tsv"
+  local:    true
+  index:    true
+- file:     "astrophysics.tsv"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/master/scripts/api/data/metadatablocks"
+  index:    false
+- file:     "biomedical.tsv"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/master/scripts/api/data/metadatablocks"
+  index:    false
+- file:     "geospatial.tsv"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/master/scripts/api/data/metadatablocks"
+  index:    false
+- file:     "journals.tsv"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/master/scripts/api/data/metadatablocks"
+  index:    false
+- file:     "social_science.tsv"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/master/scripts/api/data/metadatablocks"
+  index:    false
