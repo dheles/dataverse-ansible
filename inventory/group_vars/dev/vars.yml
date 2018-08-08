@@ -5,17 +5,6 @@ debugging:              true
 # private vars
 login_user_passphrase:  "{{ vault_login_user_passphrase }}"
 
-dataverse_branding_path:      "/var/www/dataverse/branding"
-# TODO: support serving files from branding path
-dataverse_logos_path:         "{{ dataverse.glassfish.root }}/glassfish/domains/{{ dataverse.glassfish.domain }}/docroot/logos"
-dataverse_custom_files_path:  "templates"
-dataverse_custom_header:      "custom-header.html"
-dataverse_custom_logo:        "libraries.logo.small.horizontal.white.cropped.png"
-
 # apache vars
 apache_hostname:        "dataverse-dev.test:443"
 apache_fqdn:            "dataverse-dev.test"
-
-# TODO: move to all (?)
-postgres_version_major:     9
-postgres_version_minor:     3
