@@ -68,6 +68,8 @@ db_backup_file:         "dataverse_{{ environ }}_backup.sql"
 copy_backup_file:       "dataverse_prod_backup.sql"
 db_retain_backup:       true
 db_fresh_backup:        false
+postgres_version_major: 9
+postgres_version_minor: 3
 # postgres_jdbc_version:  "42.2.3"
 postgres_jdbc_driver:   "postgresql-{{ postgres_jdbc_version }}.jar"
 postgres_hba_entries:
@@ -98,10 +100,18 @@ ssl_certificate_file:           "localhost.crt"
 ssl_certificate_key_file:       "localhost.key"
 ssl_certificate_chain_file:     false
 
+# branding vars
+dataverse_working_dir:        "/home/{{ ansible_user }}"
+dataverse_resources_path:     "{{ dataverse.glassfish.root }}/glassfish/domains/{{ dataverse.glassfish.domain }}/applications/dataverse/resources"
+dataverse_images_path:        "{{ dataverse_resources_path }}/images"
+dataverse_custom_files_path:  "templates"
+dataverse_custom_header:      "custom-header.html"
+dataverse_custom_logo:        "libraries.logo.small.horizontal.white.cropped.png"
+
 # upgrade vars
 dvu_current_version:  "4.6"
 dvu_target_version:   "{{ dataverse.version }}"
-dvu_extra_metadata_dir: "templates"
+dvu_extra_metadata_dir: "{{ dataverse_custom_files_path }}"
 dvu_extra_metadata:
 - file:     "dataContext.tsv"
   local:    true
