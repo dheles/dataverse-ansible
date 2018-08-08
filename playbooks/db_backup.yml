@@ -196,3 +196,28 @@
       path: "{{ db_backup_file }}"
       state: absent
     when: not db_retain_backup
+
+  # NOTE: while it would be easier to synchronize files directly from one server to another,
+  # i cannot seem to get the synchronize module to cooperate without asking for a password on the server.
+  # so instead, i go through the trouble of bringing the desired file to the control,
+  # then pushing it to the desired destination(s)
+  - name: determine which backup file to retrieve
+    set_fact:
+      backup_file: "{{ db_backup_file }}"
+  - set_fact:
+      backup_file: "{{ copy_backup_file }}"
+    when: db_transform_queries is defined
+
+  - name: check for existing backup file
+    stat:
+      path: "../db_backup/{{ backup_file }}"
+    delegate_to: 127.0.0.1
+    register: backup
+
+  - name: fetch backup file from server
+    block:
+    - fetch:
+        src: "{{ backup_file }}"
+        dest: "../db_backup/"
+        flat: true
+    when: db_fresh_backup or not backup.stat.exists
