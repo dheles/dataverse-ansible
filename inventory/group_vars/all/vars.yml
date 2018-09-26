@@ -20,17 +20,18 @@ dataverse:
     location: "http://localhost:{{ dataverse_api_port }}/api"
   branch:
   copyright: ", Johns Hopkins University"
-  db: dvndb
-  dbhost: localhost
-  dbuser: "{{ vault_dataverse_dbuser }}"
-  dbpass: "{{ vault_dataverse_dbpass }}"
-  dbport: 5432
+  db:
+    name: dvndb
+    host: localhost
+    user: "{{ vault_dataverse_dbuser }}"
+    pass: "{{ vault_dataverse_dbpass }}"
+    port: 5432
   demo: false
   doi:
-    prefix: "10.7281/T1"
-    protocol:
-    separator: "/"
-    service: EZID
+    authority: "10.7281"
+    protocol: "doi"
+    shoulder: "T1/"
+    provider: EZID
   filesdir: /usr/local/dvn/data
   glassfish:
     user: glassfish
@@ -63,16 +64,16 @@ rserve:
   port: 6311
 
 # db vars
-db_name:                "{{ dataverse.db }}"
-db_user:                "{{ dataverse.dbuser }}"
-db_password:            "{{ dataverse.dbpass }}"
+db_name:                "{{ dataverse.db.name }}"
+db_user:                "{{ dataverse.db.user }}"
+db_password:            "{{ dataverse.db.pass }}"
 db_backup_file:         "dataverse_{{ environ }}_backup.sql"
 copy_backup_file:       "dataverse_prod_backup.sql"
 db_retain_backup:       true
 postgres_version_major: 9
 postgres_version_minor: 3
-# postgres_jdbc_version:  "42.2.3"
-postgres_jdbc_driver:   "postgresql-{{ postgres_jdbc_version }}.jar"
+postgres_jdbc_version:  "42.2.4"
+# postgres_jdbc_driver:   "postgresql-{{ postgres_jdbc_version }}.jar"
 postgres_hba_entries:
 - type:                 "local"
   database:             "all"
@@ -128,17 +129,17 @@ dvu_extra_metadata:
   local:    true
   index:    true
 - file:     "astrophysics.tsv"
-  url:      "https://raw.githubusercontent.com/IQSS/dataverse/master/scripts/api/data/metadatablocks"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_current_version }}/scripts/api/data/metadatablocks"
   index:    false
 - file:     "biomedical.tsv"
-  url:      "https://raw.githubusercontent.com/IQSS/dataverse/master/scripts/api/data/metadatablocks"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_current_version }}/scripts/api/data/metadatablocks"
   index:    false
 - file:     "geospatial.tsv"
-  url:      "https://raw.githubusercontent.com/IQSS/dataverse/master/scripts/api/data/metadatablocks"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_current_version }}/scripts/api/data/metadatablocks"
   index:    false
 - file:     "journals.tsv"
-  url:      "https://raw.githubusercontent.com/IQSS/dataverse/master/scripts/api/data/metadatablocks"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_current_version }}/scripts/api/data/metadatablocks"
   index:    false
 - file:     "social_science.tsv"
-  url:      "https://raw.githubusercontent.com/IQSS/dataverse/master/scripts/api/data/metadatablocks"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_current_version }}/scripts/api/data/metadatablocks"
   index:    false
