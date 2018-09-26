@@ -99,6 +99,12 @@ ssl_certificate_file:           "localhost.crt"
 ssl_certificate_key_file:       "localhost.key"
 ssl_certificate_chain_file:     false
 
+# firewalld vars:
+firewalld_services:
+- service: ssh
+- service: http
+- service: https
+
 # branding vars
 dataverse_working_dir:        "/home/{{ ansible_user }}"
 dataverse_resources_path:     "{{ dataverse.glassfish.root }}/glassfish/domains/{{ dataverse.glassfish.domain }}/applications/dataverse/resources"
