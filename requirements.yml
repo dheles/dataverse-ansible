@@ -13,3 +13,6 @@
 
 - src: https://github.com/IQSS/dataverse-ansible.git
   name: dataverse
+
+- src: https://github.com/dheles/postgres-ansible-role.git
+  name: postgres
