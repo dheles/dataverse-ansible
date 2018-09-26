@@ -10,7 +10,6 @@
       state: latest
     with_items: [git, bash-completion, vim]
 
-  # TODO: use firewalld role, if needed
   # - name: Punch firewall holes for common dataverse ports
   #   firewalld:
   #     state: enabled
@@ -19,3 +18,6 @@
   #     zone: public
   #     immediate: true
   #   with_items: [80/tcp, 443/tcp, 8080/tcp, 8181/tcp, 8983/tcp]
+  - name: install and configure firewall
+    include_role:
+      name: firewalld

@@ -13,3 +13,9 @@
 
 - src: https://github.com/IQSS/dataverse-ansible.git
   name: dataverse
+
+- src: https://github.com/dheles/postgres-ansible-role.git
+  name: postgres
+
+- src: https://github.com/dheles/firewalld-ansible-role.git
+  name: firewalld

@@ -1,12 +1,12 @@
 # prod:
 # ------------------
 [app]
-dataverse-stage.mse.jhu # aka msel-dvstage
+dataverse-stage.mse.jhu.edu # aka msel-dvstage
 
 [default:children]
 app
 
-[prod:children]
+[stage:children]
 app
 
 [db:children]
@@ -16,4 +16,8 @@ app
 [db_prod:children]
 app
 [app_prod:children]
+app
+[db_not_prod:children]
+app
+[app_not_prod:children]
 app

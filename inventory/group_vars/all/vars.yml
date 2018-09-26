@@ -3,32 +3,35 @@
 
 # setup vars
 project:        "dataverse"
-version:        "0.3.0"
+version:        "0.4.0"
 login_user:     "deploy"
 login_group:    "{{ login_user }}"
 
 # testing vars
 set_up_tests:   true
 
+dataverse_api_port: 8080
 dataverse:
   adminpass: "{{ vault_dataverse_adminpass }}"
   allow_signups: true
   api:
     blocked_endpoints: "admin,test"
     blocked_policy: "localhost-only"
-    location: "http://localhost:8080/api"
+    location: "http://localhost:{{ dataverse_api_port }}/api"
+  branch:
   copyright: ", Johns Hopkins University"
-  db: dvndb
-  dbhost: localhost
-  dbuser: "{{ vault_dataverse_dbuser }}"
-  dbpass: "{{ vault_dataverse_dbpass }}"
-  dbport: 5432
+  db:
+    name: dvndb
+    host: localhost
+    user: "{{ vault_dataverse_dbuser }}"
+    pass: "{{ vault_dataverse_dbpass }}"
+    port: 5432
   demo: false
   doi:
-    prefix: "10.7281/T1"
-    protocol:
-    separator: "/"
-    service: EZID
+    authority: "10.7281"
+    protocol: "doi"
+    shoulder: "T1/"
+    provider: EZID
   filesdir: /usr/local/dvn/data
   glassfish:
     user: glassfish
@@ -40,7 +43,7 @@ dataverse:
     adminpass: "{{ vault_dataverse_glassfish_adminpass }}"
     timeout: 180
   google_analytics_key: "{{ vault_dataverse_google_analytics_key }}"
-  memheap: 1024
+  memheap: 2048
   service_email: "{{ vault_dataverse_service_email }}"
   service_name: localhost #archive.data.jhu.edu
   shibboleth:
@@ -53,7 +56,7 @@ dataverse:
     user: solr
     version: 7.3.0
   thumbnails: true
-  version: 4.9.1
+  version: 4.9.2
 rserve:
   host: localhost
   user: "{{ vault_rserve_user }}"
@@ -61,17 +64,16 @@ rserve:
   port: 6311
 
 # db vars
-db_name:                "{{ dataverse.db }}"
-db_user:                "{{ dataverse.dbuser }}"
-db_password:            "{{ dataverse.dbpass }}"
+db_name:                "{{ dataverse.db.name }}"
+db_user:                "{{ dataverse.db.user }}"
+db_password:            "{{ dataverse.db.pass }}"
 db_backup_file:         "dataverse_{{ environ }}_backup.sql"
 copy_backup_file:       "dataverse_prod_backup.sql"
 db_retain_backup:       true
-db_fresh_backup:        false
 postgres_version_major: 9
 postgres_version_minor: 3
-# postgres_jdbc_version:  "42.2.3"
-postgres_jdbc_driver:   "postgresql-{{ postgres_jdbc_version }}.jar"
+postgres_jdbc_version:  "42.2.4"
+# postgres_jdbc_driver:   "postgresql-{{ postgres_jdbc_version }}.jar"
 postgres_hba_entries:
 - type:                 "local"
   database:             "all"
@@ -92,6 +94,7 @@ apache_config_template: "templates/ssl.conf.j2"
 apache_config_file:     "/etc/httpd/conf.d/ssl.conf"
 apache_log_path:        "/var/log/httpd"
 apache_log_level:       "warn"
+apache_proxy_timeout:   600
 
 # SSL vars
 ssl_certificate_path:           "/etc/pki/tls/certs"
@@ -99,6 +102,12 @@ ssl_certificate_key_path:       "/etc/pki/tls/private"
 ssl_certificate_file:           "localhost.crt"
 ssl_certificate_key_file:       "localhost.key"
 ssl_certificate_chain_file:     false
+
+# firewalld vars:
+firewalld_services:
+- service: ssh
+- service: http
+- service: https
 
 # branding vars
 dataverse_working_dir:        "/home/{{ ansible_user }}"
@@ -120,17 +129,17 @@ dvu_extra_metadata:
   local:    true
   index:    true
 - file:     "astrophysics.tsv"
-  url:      "https://raw.githubusercontent.com/IQSS/dataverse/master/scripts/api/data/metadatablocks"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_current_version }}/scripts/api/data/metadatablocks"
   index:    false
 - file:     "biomedical.tsv"
-  url:      "https://raw.githubusercontent.com/IQSS/dataverse/master/scripts/api/data/metadatablocks"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_current_version }}/scripts/api/data/metadatablocks"
   index:    false
 - file:     "geospatial.tsv"
-  url:      "https://raw.githubusercontent.com/IQSS/dataverse/master/scripts/api/data/metadatablocks"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_current_version }}/scripts/api/data/metadatablocks"
   index:    false
 - file:     "journals.tsv"
-  url:      "https://raw.githubusercontent.com/IQSS/dataverse/master/scripts/api/data/metadatablocks"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_current_version }}/scripts/api/data/metadatablocks"
   index:    false
 - file:     "social_science.tsv"
-  url:      "https://raw.githubusercontent.com/IQSS/dataverse/master/scripts/api/data/metadatablocks"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_current_version }}/scripts/api/data/metadatablocks"
   index:    false
