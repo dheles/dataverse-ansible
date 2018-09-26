@@ -10,13 +10,15 @@ login_group:    "{{ login_user }}"
 # testing vars
 set_up_tests:   true
 
+dataverse_api_port: 8080
 dataverse:
   adminpass: "{{ vault_dataverse_adminpass }}"
   allow_signups: true
   api:
     blocked_endpoints: "admin,test"
     blocked_policy: "localhost-only"
-    location: "http://localhost:8080/api"
+    location: "http://localhost:{{ dataverse_api_port }}/api"
+  branch:
   copyright: ", Johns Hopkins University"
   db: dvndb
   dbhost: localhost
