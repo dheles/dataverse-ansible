@@ -91,6 +91,7 @@ apache_config_template: "templates/ssl.conf.j2"
 apache_config_file:     "/etc/httpd/conf.d/ssl.conf"
 apache_log_path:        "/var/log/httpd"
 apache_log_level:       "warn"
+apache_proxy_timeout:   600
 
 # SSL vars
 ssl_certificate_path:           "/etc/pki/tls/certs"
