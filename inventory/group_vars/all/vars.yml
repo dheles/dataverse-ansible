@@ -56,7 +56,7 @@ dataverse:
     user: solr
     version: 7.3.0
   thumbnails: true
-  version: 4.9.1
+  version: 4.9.2
 rserve:
   host: localhost
   user: "{{ vault_rserve_user }}"
