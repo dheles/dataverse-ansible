@@ -43,7 +43,7 @@ dataverse:
     adminpass: "{{ vault_dataverse_glassfish_adminpass }}"
     timeout: 180
   google_analytics_key: "{{ vault_dataverse_google_analytics_key }}"
-  memheap: 1024
+  memheap: 2048
   service_email: "{{ vault_dataverse_service_email }}"
   service_name: localhost #archive.data.jhu.edu
   shibboleth:
