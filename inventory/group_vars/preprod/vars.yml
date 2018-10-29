@@ -1,0 +1,21 @@
+# setup vars
+environ:                  "preprod" # dev || test || stage || preprod || prod
+login_user_passphrase:    "{{ vault_login_user_passphrase }}"
+debugging:                False
+set_up_tests:             False
+
+# apache vars
+# TODO: change to "archive.data.jhu.edu:443" at go-live
+apache_hostname:          "dataverse-prod.mse.jhu.edu"
+apache_fqdn:              "dataverse-prod.mse.jhu.edu"
+
+# SSL vars
+ssl_certificate_file:       "{{ vault_ssl_certificate_file }}"
+ssl_certificate_key_file:   "{{ vault_ssl_certificate_key_file }}"
+ssl_certificate_chain_file: "{{ vault_ssl_certificate_chain_file }}"
+
+dataverse_filesdir: "/mnt/dvn/dv-content"
+
+updated_options: [] # NOTE: remove [] to use
+# - option: "dataverse.files.directory"
+#   value:  "{{ dataverse_filesdir }}"

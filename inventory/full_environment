@@ -29,6 +29,18 @@ dataverse-stage.mse.jhu.edu
 app_stage
 db_stage
 
+# preprod:
+# ------------------
+[app_preprod]
+dataverse-prod.mse.jhu.edu
+
+[db_preprod]
+dataverse-prod.mse.jhu.edu
+
+[preprod:children]
+app_preprod
+db_preprod
+
 # prod:
 # ------------------
 [app_prod]
@@ -46,17 +58,21 @@ db_prod
 [app:children]
 app_dev
 #app_stage
+#app_preprod
 #app_prod
 
 [app_not_prod:children]
 app_dev
 #app_stage
+#app_preprod
 
 [db:children]
 #db_dev
 #db_stage
+#db_preprod
 #db_prod
 
 [db_not_prod:children]
 db_dev
 #db_stage
+#db_preprod
