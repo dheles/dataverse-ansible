@@ -1,0 +1,22 @@
+---
+- name: (un)mount remote stores
+  hosts: app
+  become: true
+
+  tasks:
+  - name: (un)mount remote stores
+    mount:
+      name:   "{{ item.name }}"
+      src:    "{{ item.src }}"
+      fstype: "{{ item.fstype }}"
+      opts:   "{{ item.opts }}"
+      state:  "{{ item.state }}"
+    with_items: "{{ stores_fstab }}"
+
+  - name: update files directory value
+    include_role:
+      name: dataverse-upgrade
+      tasks_from: update_option
+    vars:
+      option:   "dataverse.files.directory"
+      value:    "{{ dataverse_filesdir }}"
