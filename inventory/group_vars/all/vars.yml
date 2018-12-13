@@ -129,17 +129,17 @@ dvu_extra_metadata:
   local:    true
   index:    true
 - file:     "astrophysics.tsv"
-  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_current_version }}/scripts/api/data/metadatablocks"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_target_version }}/scripts/api/data/metadatablocks"
   index:    false
 - file:     "biomedical.tsv"
-  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_current_version }}/scripts/api/data/metadatablocks"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_target_version }}/scripts/api/data/metadatablocks"
   index:    false
 - file:     "geospatial.tsv"
-  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_current_version }}/scripts/api/data/metadatablocks"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_target_version }}/scripts/api/data/metadatablocks"
   index:    false
 - file:     "journals.tsv"
-  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_current_version }}/scripts/api/data/metadatablocks"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_target_version }}/scripts/api/data/metadatablocks"
   index:    false
 - file:     "social_science.tsv"
-  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_current_version }}/scripts/api/data/metadatablocks"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_target_version }}/scripts/api/data/metadatablocks"
   index:    false
