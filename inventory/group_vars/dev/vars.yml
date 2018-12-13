@@ -5,6 +5,5 @@ debugging:              true
 # private vars
 login_user_passphrase:  "{{ vault_login_user_passphrase }}"
 
-# apache vars
-apache_hostname:        "dataverse-dev.test:443"
-apache_fqdn:            "dataverse-dev.test"
+hostname:               "dataverse-dev.test"
+
