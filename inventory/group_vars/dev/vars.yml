@@ -7,3 +7,18 @@ login_user_passphrase:  "{{ vault_login_user_passphrase }}"
 
 hostname:               "dataverse-dev.test"
 
+# firewalld vars
+firewalld_ports:
+# glassfish admin
+- port: 4848
+  protocol: tcp
+  state: enabled
+# glassfish debugging
+- port: 9009
+  protocol: tcp
+  state: enabled
+# solr admin
+- port: 8983
+  protocol: tcp
+  state: enabled
+
