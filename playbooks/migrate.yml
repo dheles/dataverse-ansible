@@ -13,3 +13,4 @@
 - include: branding.yml
   tags:
   - branding
+- include: config_environment.yml
