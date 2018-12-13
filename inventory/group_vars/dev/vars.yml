@@ -22,3 +22,13 @@ firewalld_ports:
   protocol: tcp
   state: enabled
 
+# dev environment vars
+dvd_adminuser: "admin"
+dvd_adminpass_old: ""
+dvd_adminpass_new: "just_dev"
+# dvd_glassfish_user: "{{ dataverse.glassfish.user }}"
+# dvd_glassfish_root: "{{ dataverse.glassfish.root }}"
+# dvd_working_dir:    "/home/{{ ansible_user }}"
+dataverse_api_blocked_endpoints: ""
+dataverse_api_blocked_policy: ""
+
