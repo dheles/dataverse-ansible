@@ -1,0 +1,42 @@
+# NOTE: inventory for testing blue-green deployment
+
+# stage:
+# ------------------
+[app_stage]
+dataverse-stage.mse.jhu.edu
+
+[db_stage]
+dataverse-stage.mse.jhu.edu
+
+[stage:children]
+app_stage
+db_stage
+
+# preprod:
+# ------------------
+[app_preprod]
+dataverse-prod.mse.jhu.edu
+
+[db_preprod]
+dataverse-prod.mse.jhu.edu
+
+[preprod:children]
+app_preprod
+db_preprod
+
+# groups:
+# ------------------
+[app:children]
+app_stage
+app_preprod
+
+[app_not_prod:children]
+app_stage
+
+[db:children]
+
+[db_not_prod:children]
+db_stage
+
+[app_prod:children]
+app_preprod

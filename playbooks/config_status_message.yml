@@ -1,0 +1,26 @@
+---
+- name: configure the status message and header
+  hosts: app
+
+  tasks:
+  - name: clear the status message and header
+    become: true
+    become_user: "{{ dataverse.glassfish.user }}"
+    uri:
+      method: DELETE
+      url: "{{ dataverse.api.location }}/admin/settings/{{item}}"
+    with_items:
+    - ":StatusMessageHeader"
+    - ":StatusMessageText"
+
+  - name: set the status message and header
+    become: true
+    become_user: "{{ dataverse.glassfish.user }}"
+    uri:
+      method: PUT
+      url: "{{ dataverse.api.location }}/admin/settings/{{item.prop}}"
+      body: "{{item.val}}"
+    when: item.val != ""
+    with_items:
+    - { prop: ":StatusMessageHeader", val: "{{ status_message_header }}", desc: "status message header"}
+    - { prop: ":StatusMessageText", val: "{{ status_message_text }}", desc: "status message text"}

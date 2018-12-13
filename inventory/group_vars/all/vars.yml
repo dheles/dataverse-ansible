@@ -3,20 +3,23 @@
 
 # setup vars
 project:        "dataverse"
-version:        "0.4.0"
+version:        "0.5.0"
 login_user:     "deploy"
 login_group:    "{{ login_user }}"
 
 # testing vars
 set_up_tests:   true
 
-dataverse_api_port: 8080
+# TODO: unset at go-live
+status_message_header: "" #  "System Outage: 12/13/18"
+status_message_text:   "" # "The JHU Data Archive will be unavailable on December 13th, 2018 from approximately 10am until 12pm EST for system maintenance. We apologize for any inconvenience."
+
 dataverse:
   adminpass: "{{ vault_dataverse_adminpass }}"
   allow_signups: true
   api:
-    blocked_endpoints: "admin,test"
-    blocked_policy: "localhost-only"
+    blocked_endpoints: "{{ dataverse_api_blocked_endpoints }}"
+    blocked_policy: "{{ dataverse_api_blocked_policy }}"
     location: "http://localhost:{{ dataverse_api_port }}/api"
   branch:
   copyright: ", Johns Hopkins University"
@@ -32,7 +35,7 @@ dataverse:
     protocol: "doi"
     shoulder: "T1/"
     provider: EZID
-  filesdir: /usr/local/dvn/data
+  filesdir: "{{ dataverse_filesdir }}"
   glassfish:
     user: glassfish
     group: glassfish
@@ -42,10 +45,10 @@ dataverse:
     adminuser: "{{ vault_dataverse_glassfish_adminuser }}"
     adminpass: "{{ vault_dataverse_glassfish_adminpass }}"
     timeout: 180
-  google_analytics_key: "{{ vault_dataverse_google_analytics_key }}"
+  google_analytics_key: "{{ vault_dataverse_google_analytics_key | default('') }}"
   memheap: 2048
   service_email: "{{ vault_dataverse_service_email }}"
-  service_name: localhost #archive.data.jhu.edu
+  service_name: "{{ dataverse_service_name }}" #archive.data.jhu.edu
   shibboleth:
     enabled: false
     repo: "http://download.opensuse.org/repositories/security:/shibboleth/CentOS_7/security:shibboleth.repo"
@@ -56,12 +59,22 @@ dataverse:
     user: solr
     version: 7.3.0
   thumbnails: true
-  version: 4.9.2
+  version: 4.9.4
 rserve:
   host: localhost
   user: "{{ vault_rserve_user }}"
   pass: "{{ vault_rserve_pass }}"
   port: 6311
+
+dataverse_service_name: "{{ hostname }}"
+dataverse_api_port: 8080
+dataverse_api_blocked_endpoints: "admin,test"
+dataverse_api_blocked_policy: "localhost-only"
+dataverse_glassfish_uid: 1100
+dataverse_glassfish_gid: 1100
+dataverse_mountpoint: "/usr/local/dvn"
+dataverse_filesdir: "{{ dataverse_mountpoint }}/data"
+stores_fstab: []
 
 # db vars
 db_name:                "{{ dataverse.db.name }}"
@@ -89,7 +102,10 @@ postgres_hba_entries:
   address:              "samenet"
   method:               "md5"
 
+hostname:               "localhost"
 # apache vars
+apache_hostname:        "{{ hostname }}"
+apache_fqdn:            "{{ hostname }}"
 apache_config_template: "templates/ssl.conf.j2"
 apache_config_file:     "/etc/httpd/conf.d/ssl.conf"
 apache_log_path:        "/var/log/httpd"
@@ -129,17 +145,17 @@ dvu_extra_metadata:
   local:    true
   index:    true
 - file:     "astrophysics.tsv"
-  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_current_version }}/scripts/api/data/metadatablocks"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_target_version }}/scripts/api/data/metadatablocks"
   index:    false
 - file:     "biomedical.tsv"
-  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_current_version }}/scripts/api/data/metadatablocks"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_target_version }}/scripts/api/data/metadatablocks"
   index:    false
 - file:     "geospatial.tsv"
-  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_current_version }}/scripts/api/data/metadatablocks"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_target_version }}/scripts/api/data/metadatablocks"
   index:    false
 - file:     "journals.tsv"
-  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_current_version }}/scripts/api/data/metadatablocks"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_target_version }}/scripts/api/data/metadatablocks"
   index:    false
 - file:     "social_science.tsv"
-  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_current_version }}/scripts/api/data/metadatablocks"
+  url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_target_version }}/scripts/api/data/metadatablocks"
   index:    false

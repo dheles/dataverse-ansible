@@ -1,0 +1,22 @@
+---
+# NOTE: requires full_environment inventory or emulation thereof
+
+- name: recommission prod
+  hosts: app_prod
+  become: true
+
+  tasks:
+  - name: start application
+    include: tasks/start_app.yml
+
+# TODO: adjust stores_fstab (preprod & prod) for rollback
+# TODO: preprod & prod must be in the app group in the full_environment inventory
+- name: remount storage
+  include: mount_storage.yml
+
+# TODO: adjust preprod apache vars for rollback: apache_hostname & ssl_certificate_ vars
+- include: webserver.yml
+
+# TODO: adjust preprod vars for rollback (if any)
+- name: reset config values
+  include: config_environment.yml

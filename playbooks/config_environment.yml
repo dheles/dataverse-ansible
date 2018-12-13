@@ -1,0 +1,26 @@
+---
+# NOTE: since we refresh data from production to other environments which may
+# differ in their configuration, this playbook may be used to reapply settings as needed
+- name: (re)apply environment-specific configuration
+  hosts: app
+
+  tasks:
+  - name: (re)apply admin settings
+    become: true
+    become_user: "{{ dataverse.glassfish.user }}"
+    uri:
+      method: PUT
+      url: "{{ dataverse.api.location }}/admin/settings/{{item.prop}}"
+      body: "{{item.val}}"
+    with_items:
+      - { prop: ":GoogleAnalyticsCode", val: "{{ dataverse.google_analytics_key }}", desc: "key for Google Analytics"}
+      - { prop: ":SystemEmail", val: "{{ dataverse.service_email }}", desc: "instance email address"}
+      - { prop: ":Protocol", val: "{{ dataverse.doi.protocol }}", desc: "global identifier protocol"}
+      - { prop: ":DoiProvider", val: "{{ dataverse.doi.provider }}", desc: "DOI service provider (EZID or DataCite)"}
+      - { prop: ":Authority", val: "{{ dataverse.doi.authority }}", desc: "DOI prefix"}
+      - { prop: ":Shoulder,", val: "/", desc: "DOI shoulder. leave as slash (/)"}
+      # use the lower jinja filter to force boolean values to be passed as strings, in order to avoid an error
+      - { prop: ":ShibEnabled", val: "{{ dataverse.shibboleth.enabled | lower }}", desc: "enable/disable shibboleth" }
+      - { prop: ":AllowSignUp", val: "{{ dataverse.allow_signups | lower }}", desc: "allow self-signup?"}
+      - { prop: ":BlockedApiEndpoints", val: "{{ dataverse.api.blocked_endpoints }}", desc: "APIs that are controlled"}
+      - { prop: ":BlockedApiPolicy", val: "{{ dataverse.api.blocked_policy }}", desc: "control API access"}

@@ -5,6 +5,30 @@ debugging:              true
 # private vars
 login_user_passphrase:  "{{ vault_login_user_passphrase }}"
 
-# apache vars
-apache_hostname:        "dataverse-dev.test:443"
-apache_fqdn:            "dataverse-dev.test"
+hostname:               "dataverse-dev.test"
+
+# firewalld vars
+firewalld_ports:
+# glassfish admin
+- port: 4848
+  protocol: tcp
+  state: enabled
+# glassfish debugging
+- port: 9009
+  protocol: tcp
+  state: enabled
+# solr admin
+- port: 8983
+  protocol: tcp
+  state: enabled
+
+# dev environment vars
+dvd_adminuser: "admin"
+dvd_adminpass_old: ""
+dvd_adminpass_new: "just_dev"
+# dvd_glassfish_user: "{{ dataverse.glassfish.user }}"
+# dvd_glassfish_root: "{{ dataverse.glassfish.root }}"
+# dvd_working_dir:    "/home/{{ ansible_user }}"
+dataverse_api_blocked_endpoints: ""
+dataverse_api_blocked_policy: ""
+

@@ -56,15 +56,15 @@ db_prod
 # groups:
 # ------------------
 [app:children]
-app_dev
+#app_dev
 #app_stage
-#app_preprod
-#app_prod
+app_preprod
+app_prod
 
 [app_not_prod:children]
-app_dev
+#app_dev
 #app_stage
-#app_preprod
+app_preprod
 
 [db:children]
 #db_dev
@@ -73,6 +73,6 @@ app_dev
 #db_prod
 
 [db_not_prod:children]
-db_dev
+#db_dev
 #db_stage
-#db_preprod
+db_preprod

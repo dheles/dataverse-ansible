@@ -17,3 +17,18 @@
       backup: true
     become: true
     notify: restart apache
+
+  # NOTE: the redirect file is created by the dataverse install process
+  - name: configure redirect
+    lineinfile:
+      dest: "/etc/httpd/conf.d/http.redirect.conf"
+      regexp: "^ServerName"
+      line:   "ServerName {{ hostname }}"
+
+  - name: update fqdn
+    include_role:
+      name: dataverse-upgrade
+      tasks_from: update_option
+    vars:
+      option:   "dataverse.fqdn"
+      value:    "{{ hostname }}"
