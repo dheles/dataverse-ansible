@@ -1,0 +1,27 @@
+---
+# NOTE: requires full_environment inventory or emulation thereof
+# TODO: check groups and environments for unintended consequences
+
+# TODO: at go-live, make sure db_refresh is used
+- name: migrate data from prod to preprod
+  include: migrate.yml
+
+# TODO: adjust stores_fstab (preprod & prod) for go-live
+# TODO: preprod & prod must be in the app group in the full_environment inventory
+- name: un/mount storage
+  include: mount_storage.yml
+
+- name: decommission prod
+  hosts: app_prod
+  become: true
+
+  tasks:
+  - name: stop application
+    include: tasks/stop_app.yml
+
+# TODO: adjust preprod apache vars for go-live: hostname & ssl_certificate_ vars
+- include: webserver.yml
+
+# TODO: unset status message vars
+- name: release status message
+  include: config_status_message.yml
