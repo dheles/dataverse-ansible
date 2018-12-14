@@ -4,12 +4,9 @@ login_user_passphrase:    "{{ vault_login_user_passphrase }}"
 debugging:                False
 set_up_tests:             False
 
-# TODO: change to "archive.data.jhu.edu" at go-live
 hostname:                 "archive.data.jhu.edu"
 # apache vars
 apache_fqdn:              "dataverse-prod.mse.jhu.edu"
-
-# ip vars
 
 # firewalld vars
 firewalld_ipsets:
@@ -34,37 +31,18 @@ dataverse_app_name:           "dataverse"
 dataverse_resources_path:     "{{ dataverse.glassfish.root }}/glassfish/domains/{{ dataverse.glassfish.domain }}/applications/{{ dataverse_app_name }}/resources"
 
 # SSL vars
-# TODO: change at go-live
 ssl_certificate_file:       "{{ vault_ssl_certificate_file }}"
 ssl_certificate_key_file:   "{{ vault_ssl_certificate_key_file }}"
-# ssl_certificate_chain_file: "{{ vault_ssl_certificate_chain_file }}"
 
 dataverse_mountpoint: "/mnt/dvn"
 dataverse_filesdir: "{{ dataverse_mountpoint }}/dv-content"
-# preprod - sam.mse.jhu.edu:/exports/apps/dvn.snapshot      /mnt/dvn        nfs     rw,proto=tcp    0 0
+# prod - sam.mse.jhu.edu:/exports/apps/dvn      /mnt/dvn        nfs     rw,vers=3,proto=tcp    0 0
 stores_fstab:
-# TODO: testing
-# - name:   "{{ dataverse_mountpoint }}"
-#   src:    "sam.mse.jhu.edu:/exports/apps/dvn.snapshot" # TODO: no ".snapshot" at go-live
-#   fstype: "nfs"
-#   opts:   "rw,proto=tcp"
-#   state:  "present" # testing: mounted | unmounted
-# TODO: go-live
-- name:   "/mnt/dvn"
-  src:    "sam.mse.jhu.edu:/exports/apps/dvn.snapshot" # TODO: no ".snapshot" at go-live
-  fstype: "nfs"
-  opts:   "rw,proto=tcp"
-  state:  "absent" # go-live: mounted | absent
-- name:   "/mnt/dvn"
-  src:    "sam.mse.jhu.edu:/exports/apps/dvn" # TODO: no ".snapshot" at go-live
-  fstype: "nfs"
-  opts:   "rw,proto=tcp"
-  state:  "absent" # go-live: mounted | absent
 - name:   "/mnt/dvn"
   src:    "sam.mse.jhu.edu:/exports/apps/dvn"
   fstype: "nfs"
   opts:   "rw,vers=3,proto=tcp"
-  state:  "mounted" # go-live: mounted | absent
+  state:  "mounted"
 
 updated_options: [] # NOTE: remove [] to use
 # - option: "dataverse.files.directory"
