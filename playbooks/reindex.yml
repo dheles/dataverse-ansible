@@ -1,0 +1,30 @@
+---
+- name: perform an in-place reindex of the data in dataverse
+  hosts: app
+  become: true
+
+  tasks:
+  - name: reindex in-place
+    block:
+      # curl -X DELETE http://localhost:8080/api/admin/index/timestamps
+      # curl http://localhost:8080/api/admin/index/continue
+    - name: clear index timestamps
+      uri:
+        method: DELETE
+        url: "{{ dataverse.api.location }}/admin/index/timestamps"
+    - name: start or continue async reindex
+      uri:
+        url: "{{ dataverse.api.location }}/admin/index/continue"
+    when: not full_reindex
+
+  - name: full reindex
+    block:
+      # curl http://localhost:8080/api/admin/index/clear
+      # curl http://localhost:8080/api/admin/index
+    - name: clear existing index
+      uri:
+        url: "{{ dataverse.api.location }}/admin/index/clear"
+    - name: reindex
+      uri:
+        url: "{{ dataverse.api.location }}/admin/index"
+    when: full_reindex

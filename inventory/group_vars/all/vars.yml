@@ -10,13 +10,12 @@ login_group:    "{{ login_user }}"
 # testing vars
 set_up_tests:   true
 
-# TODO: unset at go-live
 status_message_header: "" #  "System Outage: 12/13/18"
 status_message_text:   "" # "The JHU Data Archive will be unavailable on December 13th, 2018 from approximately 10am until 12pm EST for system maintenance. We apologize for any inconvenience."
 
 dataverse:
   adminpass: "{{ vault_dataverse_adminpass }}"
-  allow_signups: true
+  allow_signups: false
   api:
     blocked_endpoints: "{{ dataverse_api_blocked_endpoints }}"
     blocked_policy: "{{ dataverse_api_blocked_policy }}"
@@ -159,3 +158,6 @@ dvu_extra_metadata:
 - file:     "social_science.tsv"
   url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_target_version }}/scripts/api/data/metadatablocks"
   index:    false
+
+# solr vars
+full_reindex: false

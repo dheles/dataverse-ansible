@@ -2,6 +2,7 @@
 
 import subprocess
 import re
+import os.path
 
 debugging = False
 
@@ -14,15 +15,19 @@ unencrypted = []
 for filename in staged:
     if "vault" in filename:
         if debugging: print("checking {}".format(filename))
-        fh = open(filename)
-        for line in fh:
-            match = re.search('ANSIBLE_VAULT', line)
-            if not match:
-                unencrypted.append(fh.name)
-                break
-            else:
-                if debugging: print("{} is ok".format(fh.name))
-                break
+
+        if not os.path.isfile(filename):
+            if debugging: print("{} deleted. skipping...".format(filename))
+        else:
+          fh = open(filename)
+          for line in fh:
+              match = re.search('ANSIBLE_VAULT', line)
+              if not match:
+                  unencrypted.append(fh.name)
+                  break
+              else:
+                  if debugging: print("{} is ok".format(fh.name))
+                  break
 
 if len(unencrypted) > 0:
     print("ERROR - cannot commit. the following vault files are unencrypted: ")
