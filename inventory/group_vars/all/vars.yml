@@ -158,3 +158,6 @@ dvu_extra_metadata:
 - file:     "social_science.tsv"
   url:      "https://raw.githubusercontent.com/IQSS/dataverse/v{{ dvu_target_version }}/scripts/api/data/metadatablocks"
   index:    false
+
+# solr vars
+full_reindex: false
