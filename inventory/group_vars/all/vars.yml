@@ -15,7 +15,7 @@ status_message_text:   "" # "The JHU Data Archive will be unavailable on Decembe
 
 dataverse:
   adminpass: "{{ vault_dataverse_adminpass }}"
-  allow_signups: true
+  allow_signups: false
   api:
     blocked_endpoints: "{{ dataverse_api_blocked_endpoints }}"
     blocked_policy: "{{ dataverse_api_blocked_policy }}"
