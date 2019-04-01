@@ -9,9 +9,10 @@ login_group:    "{{ login_user }}"
 
 # testing vars
 set_up_tests:   true
+debugging:      false
 
-status_message_header: "" #  "System Outage: 12/13/18"
-status_message_text:   "" # "The JHU Data Archive will be unavailable on December 13th, 2018 from approximately 10am until 12pm EST for system maintenance. We apologize for any inconvenience."
+status_message_header: "" # "DOI Migration: 12/20/18"
+status_message_text:   "" # "The JHU Data Archive is in the process of switching from EZID to DataCite, as the provider for registering the persistent identifiers for Datasets and Datafiles. The migration transfer of the authority and the existing identifiers will happen between noon and approx. 2pm EST on Thursday, December 20. Please contact us at dataservices@jhu.edu if you have any questions."
 
 dataverse:
   adminpass: "{{ vault_dataverse_adminpass }}"
@@ -30,10 +31,13 @@ dataverse:
     port: 5432
   demo: false
   doi:
-    authority: "10.7281"
-    protocol: "doi"
-    shoulder: "T1/"
-    provider: EZID
+    authority: "{{ dataverse_doi_authority }}"
+    baseurl: "{{ dataverse_doi_baseurl }}"
+    username: "{{ dataverse_doi_username }}"
+    password: "{{ dataverse_doi_password }}"
+    protocol: "{{ dataverse_doi_protocol }}"
+    shoulder: "{{ dataverse_doi_shoulder }}"
+    provider: "{{ dataverse_doi_provider }}"
   filesdir: "{{ dataverse_filesdir }}"
   glassfish:
     user: glassfish
@@ -57,6 +61,7 @@ dataverse:
     root: /usr/local/solr
     user: solr
     version: 7.3.0
+  srcdir: /tmp/dataverse
   thumbnails: true
   version: 4.9.4
 rserve:
@@ -74,6 +79,16 @@ dataverse_glassfish_gid: 1100
 dataverse_mountpoint: "/usr/local/dvn"
 dataverse_filesdir: "{{ dataverse_mountpoint }}/data"
 stores_fstab: []
+
+# DOI vars
+dataverse_doi_protocol:   doi
+dataverse_doi_provider:   DataCite
+dataverse_doi_baseurl:    "https://mds.datacite.org/" # test: mds.test.datacite.org
+dataverse_doi_authority:  "10.7281" # test: "10.5072"
+dataverse_doi_shoulder:   "T1/"
+dataverse_doi_username:   "{{ vault_doi_username }}"
+dataverse_doi_password:   "{{ vault_doi_password }}"
+dataverse_file_pids_enabled: false
 
 # db vars
 db_name:                "{{ dataverse.db.name }}"

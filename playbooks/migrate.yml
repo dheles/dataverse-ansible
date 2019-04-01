@@ -1,16 +1,18 @@
 ---
-- include: db_upgrade.yml
-  tags:
-  - db
-  - db_upgrade
-- include: db_deploy_backup.yml # or db_refresh.yml (requires full_environment inventory)
+# - include: db_upgrade.yml
+#   tags:
+#   - db
+#   - db_upgrade
+- include: db_deploy_backup.yml # db_deploy_backup.yml | db_refresh.yml (requires full_environment inventory)
   tags:
   - db
   - db_deploy_backup
-- include: upgrade.yml
-  tags:
-  - upgrade
+# - include: upgrade.yml
+#   tags:
+#   - upgrade
 - include: branding.yml
   tags:
   - branding
 - include: config_environment.yml
+- name: reindex solr
+  include: reindex.yml

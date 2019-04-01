@@ -47,3 +47,6 @@ stores_fstab:
 updated_options: [] # NOTE: remove [] to use
 # - option: "dataverse.files.directory"
 #   value:  "{{ dataverse_filesdir }}"
+
+# solr vars
+full_reindex: false
