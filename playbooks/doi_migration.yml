@@ -1,0 +1,36 @@
+---
+- name: adjust configuration for DOI migration
+  hosts: app
+
+  tasks:
+  - name: adjust configuration for DOI migration
+    become: true
+    become_user: "{{ dataverse.glassfish.user }}"
+    uri:
+      method: PUT
+      url: "{{ dataverse.api.location }}/admin/settings/{{item.prop}}"
+      body: "{{item.val}}"
+    with_items:
+      - { prop: ":Protocol", val: "{{ dataverse.doi.protocol }}", desc: "global identifier protocol"}
+      - { prop: ":DoiProvider", val: "{{ dataverse.doi.provider }}", desc: "DOI service provider (EZID or DataCite)"}
+      - { prop: ":Authority", val: "{{ dataverse.doi.authority }}", desc: "DOI prefix"}
+      - { prop: ":Shoulder,", val: "{{ dataverse.doi.shoulder }}", desc: "DOI shoulder"}
+
+  - name: update JVM options
+    include_role:
+      name: dataverse-upgrade
+      tasks_from: update_options
+      apply:
+        no_log: "{{ not debugging }}"
+    vars:
+      updated:
+      - option: "doi.baseurlstring"
+        value:  "{{ dataverse_doi_baseurl }}"
+      - option: "doi.username"
+        value:  "{{ dataverse_doi_username }}"
+      - option: "doi.password"
+        value:  "{{ dataverse_doi_password }}"
+
+# TODO: unset status message vars
+- name: release status message
+  include: config_status_message.yml

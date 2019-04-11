@@ -32,3 +32,16 @@ dvd_adminpass_new: "just_dev"
 dataverse_api_blocked_endpoints: ""
 dataverse_api_blocked_policy: ""
 
+dataverse_branch: alias
+dataverse_repo: https://github.com/dheles/dataverse.git
+
+# DOI vars
+dataverse_doi_baseurl:    "https://mds.test.datacite.org/"
+dataverse_doi_authority:  "10.33562" # "10.5072"
+dataverse_doi_shoulder:   ""
+dataverse_doi_password:   "{{ vault_doi_password }}" # "${ALIAS=doi-password}"
+
+# solr vars
+full_reindex: true
+
+

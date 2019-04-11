@@ -18,9 +18,25 @@
       - { prop: ":Protocol", val: "{{ dataverse.doi.protocol }}", desc: "global identifier protocol"}
       - { prop: ":DoiProvider", val: "{{ dataverse.doi.provider }}", desc: "DOI service provider (EZID or DataCite)"}
       - { prop: ":Authority", val: "{{ dataverse.doi.authority }}", desc: "DOI prefix"}
-      - { prop: ":Shoulder,", val: "/", desc: "DOI shoulder. leave as slash (/)"}
+      - { prop: ":Shoulder,", val: "{{ dataverse.doi.shoulder }}", desc: "DOI shoulder"}
       # use the lower jinja filter to force boolean values to be passed as strings, in order to avoid an error
       - { prop: ":ShibEnabled", val: "{{ dataverse.shibboleth.enabled | lower }}", desc: "enable/disable shibboleth" }
       - { prop: ":AllowSignUp", val: "{{ dataverse.allow_signups | lower }}", desc: "allow self-signup?"}
+      - { prop: "FilePIDsEnabled", val: "{{ dataverse_file_pids_enabled | lower }}", desc: "mint DOIs for files?"}
       - { prop: ":BlockedApiEndpoints", val: "{{ dataverse.api.blocked_endpoints }}", desc: "APIs that are controlled"}
       - { prop: ":BlockedApiPolicy", val: "{{ dataverse.api.blocked_policy }}", desc: "control API access"}
+
+  - name: update JVM options
+    include_role:
+      name: dataverse-upgrade
+      tasks_from: update_options
+      apply:
+        no_log: "{{ not debugging }}"
+    vars:
+      updated:
+      - option: "doi.baseurlstring"
+        value:  "{{ dataverse_doi_baseurl }}"
+      - option: "doi.username"
+        value:  "{{ dataverse_doi_username }}"
+      - option: "doi.password"
+        value:  "{{ dataverse_doi_password }}"
