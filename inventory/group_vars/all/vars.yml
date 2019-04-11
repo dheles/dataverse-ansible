@@ -3,7 +3,7 @@
 
 # setup vars
 project:        "dataverse"
-version:        "0.5.0"
+version:        "1.0.0"
 login_user:     "deploy"
 login_group:    "{{ login_user }}"
 
@@ -60,10 +60,10 @@ dataverse:
     group: solr
     root: /usr/local/solr
     user: solr
-    version: 7.3.0
+    version: "7.3.1"
   srcdir: /tmp/dataverse
   thumbnails: true
-  version: 4.9.4
+  version: "4.12"
 rserve:
   host: localhost
   user: "{{ vault_rserve_user }}"
@@ -98,7 +98,7 @@ db_backup_file:         "dataverse_{{ environ }}_backup.sql"
 copy_backup_file:       "dataverse_prod_backup.sql"
 db_retain_backup:       true
 postgres_version_major: 9
-postgres_version_minor: 3
+postgres_version_minor: 6
 postgres_jdbc_version:  "42.2.4"
 # postgres_jdbc_driver:   "postgresql-{{ postgres_jdbc_version }}.jar"
 postgres_hba_entries:
@@ -148,7 +148,7 @@ dataverse_custom_header:      "custom-header.html"
 dataverse_custom_logo:        "libraries.logo.small.horizontal.white.cropped.png"
 
 # upgrade vars
-dvu_current_version:  "4.6"
+dvu_current_version:  "4.12"
 dvu_target_version:   "{{ dataverse.version }}"
 dvu_extra_metadata_dir: "{{ dataverse_custom_files_path }}"
 dvu_extra_metadata:
