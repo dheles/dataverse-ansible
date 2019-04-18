@@ -79,6 +79,8 @@ dataverse_glassfish_gid: 1100
 dataverse_mountpoint: "/usr/local/dvn"
 dataverse_filesdir: "{{ dataverse_mountpoint }}/data"
 stores_fstab: []
+email_domain_name: "jhu.edu"
+admin_users: "'dataverseAdmin'"
 
 # DOI vars
 dataverse_doi_protocol:   doi
@@ -94,8 +96,10 @@ dataverse_file_pids_enabled: false
 db_name:                "{{ dataverse.db.name }}"
 db_user:                "{{ dataverse.db.user }}"
 db_password:            "{{ dataverse.db.pass }}"
-db_backup_file:         "dataverse_{{ environ }}_backup.sql"
-copy_backup_file:       "dataverse_prod_backup.sql"
+db_backup_name:         "dataverse_{{ environ }}"
+db_backup_file:         "{{ db_backup_name }}_backup.sql"
+copy_db_name:           "dataverse_copy"
+copy_backup_file:       "{{ copy_db_name }}_backup.sql"
 db_retain_backup:       true
 postgres_version_major: 9
 postgres_version_minor: 6
@@ -115,6 +119,11 @@ postgres_hba_entries:
   user:                 "{{ db_user }}"
   address:              "samenet"
   method:               "md5"
+
+# data transform queries
+db_transform_queries:
+- "deidentify_db.sql.j2"
+- "clear_nonessential_data.sql.j2"
 
 hostname:               "localhost"
 # apache vars
