@@ -45,3 +45,6 @@ dataverse_doi_password:   "{{ vault_doi_password }}" # "${ALIAS=doi-password}"
 full_reindex: true
 
 
+reindex_dataset_ids:  [16,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,36,37,38,39,40,41,42]
+# reindex_dataset_pids: ['10.7281/T1/KV9KNX','10.7281/T1/3XLWZX']
+# reindex_dataverse_ids: [2,3]
