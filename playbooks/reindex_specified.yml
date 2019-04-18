@@ -1,0 +1,26 @@
+---
+- name: reindex specified datasets and dataverses
+  hosts: app
+  become: true
+
+  tasks:
+  # curl http://localhost:8080/api/admin/index/datasets/7504557
+  - name: reindex datasets by database ID
+    uri:
+      url: "{{ dataverse.api.location }}/admin/index/datasets/{{ item }}"
+    with_items: "{{ reindex_dataset_ids }}"
+    when: reindex_dataset_ids is defined
+
+  # curl http://localhost:8080/api/admin/index/dataset?persistentId=doi:10.5072/FK2/AAA000
+  - name: reindex datasets by persistent ID
+    uri:
+      url: "{{ dataverse.api.location }}/admin/index/dataset?persistentId=doi:{{ item }}"
+    with_items: "{{ reindex_dataset_pids }}"
+    when: reindex_dataset_pids is defined
+
+  # curl curl http://localhost:8080/api/admin/index/dataverses/135
+  - name: reindex dataverses by database ID
+    uri:
+      url: "{{ dataverse.api.location }}/admin/index/dataverses/{{ item }}"
+    with_items: "{{ reindex_dataverse_ids }}"
+    when: reindex_dataverse_ids is defined
