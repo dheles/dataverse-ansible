@@ -44,6 +44,8 @@ stores_fstab:
   opts:   "rw,vers=3,proto=tcp"
   state:  "mounted"
 
+admin_users: "{{ vault_admin_users }}"
+
 updated_options: [] # NOTE: remove [] to use
 # - option: "dataverse.files.directory"
 #   value:  "{{ dataverse_filesdir }}"

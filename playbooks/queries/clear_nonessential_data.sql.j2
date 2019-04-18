@@ -1,0 +1,24 @@
+/*
+clear nonessential data from Dataverse
+(e.g. action logs, etc)
+minimum version tested: 4.12
+maximum version tested: 4.12
+*/
+
+TRUNCATE TABLE
+  actionlogrecord,
+  apitoken,
+  confirmemaildata,
+  fileaccessrequests,
+  customquestionresponse,
+  customquestionvalue,
+  customquestion,
+  guestbookresponse,
+  maplayermetadata,
+  oauth2tokendata,
+  passwordresetdata,
+  pendingworkflowinvocation_localdata,
+  pendingworkflowinvocation,
+  savedsearchfilterquery,
+  savedsearch,
+  worldmapauth_token;

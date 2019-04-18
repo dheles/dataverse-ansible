@@ -22,6 +22,8 @@ stores_fstab:
   opts:   "rw,proto=tcp"
   state:   "absent" # present | absent
 
+# admin_users: "{{ vault_admin_users }}"
+
 # DOI vars
 dataverse_doi_baseurl:    "https://mds.test.datacite.org/"
 dataverse_doi_authority:  "10.33562"

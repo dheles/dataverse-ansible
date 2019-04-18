@@ -1,0 +1,34 @@
+/*
+de-identify PII data in Dataverse
+minimum version tested: 4.12
+maximum version tested: 4.12
+*/
+
+UPDATE authenticateduser a
+SET affiliation     = 'affiliation',
+    email     		  = 'user'      || id || '@' || '{{ email_domain_name }}',
+    firstname 		  = 'first'     || id,
+    lastname        = 'last'      || id,
+    "position"      = 'position'  || id,
+    useridentifier  = 'user'      || id,
+    lastlogintime 	= NULL,
+    lastapiusetime	= NULL
+WHERE a.useridentifier NOT IN ({{ admin_users }});
+
+UPDATE authenticateduserlookup al
+SET	persistentuserid = 'user' || authenticateduser_id
+WHERE al.persistentuserid NOT IN ({{ admin_users }});
+
+UPDATE builtinuser b
+SET encryptedpassword = NULL,
+    username          = 'user' || id
+WHERE b.username NOT IN ({{ admin_users }});
+
+UPDATE dataversecontact dc
+SET contactemail = 'contact' || id || '@' || '{{ email_domain_name }}';
+
+-- NOTE: not sure that this is the best approach. with the wrong data, there's a
+-- possibility of constraint violations, if the application logic doesn't prevent them
+UPDATE roleassignment r
+SET assigneeidentifier = '@dataverseAdmin'
+WHERE r.assigneeidentifier NOT LIKE '#%'
