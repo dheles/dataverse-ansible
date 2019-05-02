@@ -63,7 +63,7 @@ dataverse:
     version: "7.3.1"
   srcdir: /tmp/dataverse
   thumbnails: true
-  version: "4.12"
+  version: "4.13"
 rserve:
   host: localhost
   user: "{{ vault_rserve_user }}"
@@ -157,7 +157,7 @@ dataverse_custom_header:      "custom-header.html"
 dataverse_custom_logo:        "libraries.logo.small.horizontal.white.cropped.png"
 
 # upgrade vars
-dvu_current_version:  "4.12"
+dvu_current_version:  "4.13"
 dvu_target_version:   "{{ dataverse.version }}"
 dvu_extra_metadata_dir: "{{ dataverse_custom_files_path }}"
 dvu_extra_metadata:
