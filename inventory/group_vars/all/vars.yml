@@ -90,7 +90,7 @@ dataverse_doi_authority:  "10.7281" # test: "10.5072"
 dataverse_doi_shoulder:   "T1/"
 dataverse_doi_username:   "{{ vault_doi_username }}"
 dataverse_doi_password:   "{{ vault_doi_password }}"
-dataverse_file_pids_enabled: false
+dataverse_file_pids_enabled: true
 
 # db vars
 db_name:                "{{ dataverse.db.name }}"
