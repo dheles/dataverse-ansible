@@ -1,5 +1,5 @@
 ---
-- hosts: db_not_prod
+- hosts: app
 
   tasks:
   - name: add pgpass entry for database
@@ -17,3 +17,18 @@
   - name: upgrade dataverse
     include_role:
       name: dataverse-upgrade
+
+- name: brand dataverse
+  import_playbook: branding.yml
+  tags:
+  - branding
+
+- name: reconfig dataverse
+  import_playbook: config_environment.yml
+
+- name: alias passwords
+  import_playbook: alias_passwords.yml
+
+# NOTE: workaround for https://github.com/IQSS/dataverse/issues/5575
+- name: reindex problematic datasets
+  import_playbook: reindex_specified.yml
